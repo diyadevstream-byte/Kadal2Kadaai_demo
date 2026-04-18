@@ -1,0 +1,399 @@
+{
+  "Brackish Water Fish": {
+    "Barramundi": {
+      "name": "Barramundi",
+      "category": "Brackish Water Fish",
+      "price": 771,
+      "primary": "/Photos/Brackish Water Fish/Barramundi 1",
+      "secondary": "/Photos/Brackish Water Fish/Barramundi 2"
+    },
+    "Pearl Spot": {
+      "name": "Pearl Spot",
+      "category": "Brackish Water Fish",
+      "price": 689,
+      "primary": "/Photos/Brackish Water Fish/Pearl Spot 1",
+      "secondary": "/Photos/Brackish Water Fish/Pearl Spot 2"
+    }
+  },
+  "Cat Fish": {
+    "Magur": {
+      "name": "Magur",
+      "category": "Cat Fish",
+      "price": 667,
+      "primary": "/Photos/Cat Fish/Magur (1).jpg",
+      "secondary": "/Photos/Cat Fish/Magur (2).jpg"
+    },
+    "Pangasius": {
+      "name": "Pangasius",
+      "category": "Cat Fish",
+      "price": 577,
+      "primary": "/Photos/Cat Fish/Pangasius (1).jpg",
+      "secondary": "/Photos/Cat Fish/Pangasius (2).jpg"
+    },
+    "Singhi": {
+      "name": "Singhi",
+      "category": "Cat Fish",
+      "price": 774,
+      "primary": "/Photos/Cat Fish/Singhi (1).jpg",
+      "secondary": "/Photos/Cat Fish/Singhi (2).jpg"
+    },
+    "Wallago": {
+      "name": "Wallago",
+      "category": "Cat Fish",
+      "price": 751,
+      "primary": "/Photos/Cat Fish/Wallago (1).jpg",
+      "secondary": "/Photos/Cat Fish/Wallago (2).jpg"
+    }
+  },
+  "Crabs": {
+    "Blue Crab (Blue Nandu)": {
+      "name": "Blue Crab (Blue Nandu)",
+      "category": "Crabs",
+      "price": 420,
+      "primary": "/Photos/Crabs/Blue Crab (Blue Nandu) (1).jpg",
+      "secondary": "/Photos/Crabs/Blue Crab (Blue Nandu) (2).jpg"
+    },
+    "Freshwater Crab": {
+      "name": "Freshwater Crab",
+      "category": "Crabs",
+      "price": 303,
+      "primary": "/Photos/Crabs/Freshwater Crab (1).jpg",
+      "secondary": "/Photos/Crabs/Freshwater Crab (2).jpg"
+    },
+    "Green Crab (Green Nandu)": {
+      "name": "Green Crab (Green Nandu)",
+      "category": "Crabs",
+      "price": 466,
+      "primary": "/Photos/Crabs/Green Crab (Green Nandu) (1).jpg",
+      "secondary": "/Photos/Crabs/Green Crab (Green Nandu) (2).jpg"
+    },
+    "Mangrove Crab (Mangrove Nandu)": {
+      "name": "Mangrove Crab (Mangrove Nandu)",
+      "category": "Crabs",
+      "price": 679,
+      "primary": "/Photos/Crabs/Mangrove Crab (Mangrove Nandu) (1).jpg",
+      "secondary": "/Photos/Crabs/Mangrove Crab (Mangrove Nandu) (2).jpg"
+    },
+    "Mud Crab (Nandu)": {
+      "name": "Mud Crab (Nandu)",
+      "category": "Crabs",
+      "price": 521,
+      "primary": "/Photos/Crabs/Mud Crab (Nandu) (1).jpg",
+      "secondary": "/Photos/Crabs/Mud Crab (Nandu) (2).jpg"
+    },
+    "Soft Shell Crab": {
+      "name": "Soft Shell Crab",
+      "category": "Crabs",
+      "price": 521,
+      "primary": "/Photos/Crabs/Soft Shell Crab (1).jpg",
+      "secondary": "/Photos/Crabs/Soft Shell Crab (2).jpg"
+    }
+  },
+  "Craps": {
+    "Catla Fish": {
+      "name": "Catla Fish",
+      "category": "Craps",
+      "price": 317,
+      "primary": "/Photos/Craps/Catla Fish(1).jpg",
+      "secondary": "/Photos/Craps/Catla Fish(2).jpg"
+    },
+    "Grass Carp": {
+      "name": "Grass Carp",
+      "category": "Craps",
+      "price": 618,
+      "primary": "/Photos/Craps/Grass Carp(1).jpg",
+      "secondary": "/Photos/Craps/Grass Carp(2).jpg"
+    },
+    "Mrigal Fish": {
+      "name": "Mrigal Fish",
+      "category": "Craps",
+      "price": 620,
+      "primary": "/Photos/Craps/Mrigal Fish(1).jpg",
+      "secondary": "/Photos/Craps/Mrigal Fish(2).jpg"
+    },
+    "Rohu Fish": {
+      "name": "Rohu Fish",
+      "category": "Craps",
+      "price": 466,
+      "primary": "/Photos/Craps/Rohu Fish(1).jpg",
+      "secondary": "/Photos/Craps/Rohu Fish(2).jpg"
+    },
+    "Silver Carp": {
+      "name": "Silver Carp",
+      "category": "Craps",
+      "price": 797,
+      "primary": "/Photos/Craps/Silver Carp(1).jpg",
+      "secondary": "/Photos/Craps/Silver Carp(2).jpg"
+    }
+  },
+  "Dry Seafood": {
+    "Dry Anchovy (Nethili Karuvadu)": {
+      "name": "Dry Anchovy (Nethili Karuvadu)",
+      "category": "Dry Seafood",
+      "price": 693,
+      "primary": "/Photos/Dry Seafood/Dry Anchovy (Nethili Karuvadu) (1).jpg",
+      "secondary": "/Photos/Dry Seafood/Dry Anchovy (Nethili Karuvadu) (2).jpg"
+    },
+    "Dry Bombay Duck (Bombil Sukka)": {
+      "name": "Dry Bombay Duck (Bombil Sukka)",
+      "category": "Dry Seafood",
+      "price": 671,
+      "primary": "/Photos/Dry Seafood/Dry Bombay Duck (Bombil Sukka) (1).jpg",
+      "secondary": "/Photos/Dry Seafood/Dry Bombay Duck (Bombil Sukka) (2).jpg"
+    },
+    "Dry Sardine (Mathi Karuvadu": {
+      "name": "Dry Sardine (Mathi Karuvadu",
+      "category": "Dry Seafood",
+      "price": 721,
+      "primary": "/Photos/Dry Seafood/Dry Sardine (Mathi Karuvadu (1).jpg",
+      "secondary": "/Photos/Dry Seafood/Dry Sardine (Mathi Karuvadu (2).jpg"
+    },
+    "Dry Shrimp (Iraal Karuvadu)": {
+      "name": "Dry Shrimp (Iraal Karuvadu)",
+      "category": "Dry Seafood",
+      "price": 783,
+      "primary": "/Photos/Dry Seafood/Dry Shrimp (Iraal Karuvadu) (1).jpg",
+      "secondary": "/Photos/Dry Seafood/Dry Shrimp (Iraal Karuvadu) (2).jpg"
+    },
+    "Salted Fish (Uppu Meen)": {
+      "name": "Salted Fish (Uppu Meen)",
+      "category": "Dry Seafood",
+      "price": 339,
+      "primary": "/Photos/Dry Seafood/Salted Fish (Uppu Meen) (1).jpg",
+      "secondary": "/Photos/Dry Seafood/Salted Fish (Uppu Meen) (2).jpg"
+    }
+  },
+  "Eel Fish": {
+    "Longfin Eel": {
+      "name": "Longfin Eel",
+      "category": "Eel Fish",
+      "price": 328,
+      "primary": "/Photos/Eel Fish/Longfin Eel (1).jpg",
+      "secondary": "/Photos/Eel Fish/Longfin Eel (2).jpg"
+    },
+    "Mud Eel": {
+      "name": "Mud Eel",
+      "category": "Eel Fish",
+      "price": 768,
+      "primary": "/Photos/Eel Fish/Mud Eel (1).jpg",
+      "secondary": "/Photos/Eel Fish/Mud Eel (2).jpg"
+    },
+    "Spiny Eel": {
+      "name": "Spiny Eel",
+      "category": "Eel Fish",
+      "price": 760,
+      "primary": "/Photos/Eel Fish/Spiny Eel (1).jpg",
+      "secondary": "/Photos/Eel Fish/Spiny Eel (2).jpg"
+    },
+    "Swamp Eel": {
+      "name": "Swamp Eel",
+      "category": "Eel Fish",
+      "price": 467,
+      "primary": "/Photos/Eel Fish/Swamp Eel (1).jpg",
+      "secondary": "/Photos/Eel Fish/Swamp Eel (2).jpg"
+    }
+  },
+  "Freashwater Prawn": {
+    "Monsoon River Prawn": {
+      "name": "Monsoon River Prawn",
+      "category": "Freashwater Prawn",
+      "price": 383,
+      "primary": "/Photos/Freashwater Prawn/Monsoon River Prawn (1).jpg",
+      "secondary": "/Photos/Freashwater Prawn/Monsoon River Prawn (2).jpg"
+    },
+    "Red Claw Prawn": {
+      "name": "Red Claw Prawn",
+      "category": "Freashwater Prawn",
+      "price": 733,
+      "primary": "/Photos/Freashwater Prawn/Red Claw Prawn (1).jpg",
+      "secondary": "/Photos/Freashwater Prawn/Red Claw Prawn (2).jpg"
+    },
+    "River Prawn": {
+      "name": "River Prawn",
+      "category": "Freashwater Prawn",
+      "price": 690,
+      "primary": "/Photos/Freashwater Prawn/River Prawn (1).jpg",
+      "secondary": "/Photos/Freashwater Prawn/River Prawn (2).jpg"
+    },
+    "Scampi": {
+      "name": "Scampi",
+      "category": "Freashwater Prawn",
+      "price": 367,
+      "primary": "/Photos/Freashwater Prawn/Scampi (1).jpg",
+      "secondary": "/Photos/Freashwater Prawn/Scampi (2).jpg"
+    }
+  },
+  "freshwater fish": {
+    "Catla": {
+      "name": "Catla",
+      "category": "freshwater fish",
+      "price": 789,
+      "primary": "/Photos/freshwater fish/Catla 1",
+      "secondary": "/Photos/freshwater fish/Catla 2"
+    },
+    "Rohu": {
+      "name": "Rohu",
+      "category": "freshwater fish",
+      "price": 533,
+      "primary": "/Photos/freshwater fish/Rohu 1",
+      "secondary": "/Photos/freshwater fish/Rohu 2"
+    }
+  },
+  "Marine fish": {
+    "Mackerel": {
+      "name": "Mackerel",
+      "category": "Marine fish",
+      "price": 720,
+      "primary": "/Photos/Marine fish/common/Mackerel 1",
+      "secondary": "/Photos/Marine fish/common/Mackerel 2.jpg"
+    },
+    "Sardine": {
+      "name": "Sardine",
+      "category": "Marine fish",
+      "price": 311,
+      "primary": "/Photos/Marine fish/common/Sardine 1",
+      "secondary": "/Photos/Marine fish/common/Sardine 2"
+    },
+    "Pomfret": {
+      "name": "Pomfret",
+      "category": "Marine fish",
+      "price": 404,
+      "primary": "/Photos/Marine fish/premium/Pomfret 1",
+      "secondary": "/Photos/Marine fish/premium/Pomfret 2"
+    },
+    "Seer Fish": {
+      "name": "Seer Fish",
+      "category": "Marine fish",
+      "price": 320,
+      "primary": "/Photos/Marine fish/premium/Seer Fish 1",
+      "secondary": "/Photos/Marine fish/premium/Seer Fish 2.jpg"
+    }
+  },
+  "Murrel Fish": {
+    "Dwarf Snakehead": {
+      "name": "Dwarf Snakehead",
+      "category": "Murrel Fish",
+      "price": 392,
+      "primary": "/Photos/Murrel Fish/Dwarf Snakehead (1).jpg",
+      "secondary": "/Photos/Murrel Fish/Dwarf Snakehead (2).webp"
+    },
+    "Giant Snakehead": {
+      "name": "Giant Snakehead",
+      "category": "Murrel Fish",
+      "price": 324,
+      "primary": "/Photos/Murrel Fish/Giant Snakehead (1).jpg",
+      "secondary": "/Photos/Murrel Fish/Giant Snakehead (2).jpg"
+    },
+    "Malabar Snakehead": {
+      "name": "Malabar Snakehead",
+      "category": "Murrel Fish",
+      "price": 314,
+      "primary": "/Photos/Murrel Fish/Malabar Snakehead (1).webp",
+      "secondary": "/Photos/Murrel Fish/Malabar Snakehead (2).jpg"
+    },
+    "Spotted Snakehead": {
+      "name": "Spotted Snakehead",
+      "category": "Murrel Fish",
+      "price": 514,
+      "primary": "/Photos/Murrel Fish/Spotted Snakehead (1).jpg",
+      "secondary": "/Photos/Murrel Fish/Spotted Snakehead (2).jpg"
+    },
+    "Striped Snakehead": {
+      "name": "Striped Snakehead",
+      "category": "Murrel Fish",
+      "price": 496,
+      "primary": "/Photos/Murrel Fish/Striped Snakehead (1).jpg",
+      "secondary": "/Photos/Murrel Fish/Striped Snakehead (2).jpg"
+    }
+  },
+  "seconadary fresh water fish": {
+    "Common Carp": {
+      "name": "Common Carp",
+      "category": "seconadary fresh water fish",
+      "price": 432,
+      "primary": "/Photos/seconadary fresh water fish/Common Carp 1",
+      "secondary": "/Photos/seconadary fresh water fish/Common Carp 2"
+    },
+    "Tilapia": {
+      "name": "Tilapia",
+      "category": "seconadary fresh water fish",
+      "price": 550,
+      "primary": "/Photos/seconadary fresh water fish/Tilapia 1",
+      "secondary": "/Photos/seconadary fresh water fish/Tilapia 2"
+    }
+  },
+  "Shellfish": {
+    "Black Mussels": {
+      "name": "Black Mussels",
+      "category": "Shellfish",
+      "price": 711,
+      "primary": "/Photos/Shellfish/Black Mussels (1).jpg",
+      "secondary": "/Photos/Shellfish/Black Mussels (2).jpg"
+    },
+    "Clams (Kakka)": {
+      "name": "Clams (Kakka)",
+      "category": "Shellfish",
+      "price": 718,
+      "primary": "/Photos/Shellfish/Clams (Kakka) (1).jpg",
+      "secondary": "/Photos/Shellfish/Clams (Kakka) (2).jpg"
+    },
+    "Green Mussels (Kallumakkaya)": {
+      "name": "Green Mussels (Kallumakkaya)",
+      "category": "Shellfish",
+      "price": 516,
+      "primary": "/Photos/Shellfish/Green Mussels (Kallumakkaya) (1).jpg",
+      "secondary": "/Photos/Shellfish/Green Mussels (Kallumakkaya) (2).jpg"
+    },
+    "Indian Oyste": {
+      "name": "Indian Oyste",
+      "category": "Shellfish",
+      "price": 786,
+      "primary": "/Photos/Shellfish/Indian Oyste (1).jpg",
+      "secondary": "/Photos/Shellfish/Indian Oyste (2).jpg"
+    },
+    "Pearl Oyster": {
+      "name": "Pearl Oyster",
+      "category": "Shellfish",
+      "price": 725,
+      "primary": "/Photos/Shellfish/Pearl Oyster (1).jpg",
+      "secondary": "/Photos/Shellfish/Pearl Oyster (2).jpg"
+    },
+    "Razor Clams": {
+      "name": "Razor Clams",
+      "category": "Shellfish",
+      "price": 674,
+      "primary": "/Photos/Shellfish/Razor Clams (1).jpg",
+      "secondary": "/Photos/Shellfish/Razor Clams(2).jpg"
+    }
+  },
+  "Squid  Cuttlefish  Octopus": {
+    "Baby Squid": {
+      "name": "Baby Squid",
+      "category": "Squid  Cuttlefish  Octopus",
+      "price": 645,
+      "primary": "/Photos/Squid  Cuttlefish  Octopus/Baby Squid (1).jpg",
+      "secondary": "/Photos/Squid  Cuttlefish  Octopus/Baby Squid (2).jpg"
+    },
+    "Cuttlefish (Sepia)": {
+      "name": "Cuttlefish (Sepia)",
+      "category": "Squid  Cuttlefish  Octopus",
+      "price": 369,
+      "primary": "/Photos/Squid  Cuttlefish  Octopus/Cuttlefish (Sepia) (1).jpg",
+      "secondary": "/Photos/Squid  Cuttlefish  Octopus/Cuttlefish (Sepia) (2).jpg"
+    },
+    "Octopus": {
+      "name": "Octopus",
+      "category": "Squid  Cuttlefish  Octopus",
+      "price": 426,
+      "primary": "/Photos/Squid  Cuttlefish  Octopus/Octopus (1).jpg",
+      "secondary": "/Photos/Squid  Cuttlefish  Octopus/Octopus (2).jpg"
+    },
+    "Squid (Kanava)": {
+      "name": "Squid (Kanava)",
+      "category": "Squid  Cuttlefish  Octopus",
+      "price": 380,
+      "primary": "/Photos/Squid  Cuttlefish  Octopus/Squid (Kanava) (1).jpg",
+      "secondary": "/Photos/Squid  Cuttlefish  Octopus/Squid (Kanava) (2).jpg"
+    }
+  }
+}
