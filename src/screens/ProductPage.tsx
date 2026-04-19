@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ChevronRight, Star, Plus, ChevronDown, User, MessageSquare, ArrowLeft, Anchor } from 'lucide-react';
+import { ChevronRight, Star, Plus, ChevronDown, User, MessageSquare, ArrowLeft, Anchor, Activity } from 'lucide-react';
 import fishData from '../data/seafoodProducts.json';
 import ProductCard from '../components/ProductCard';
 
