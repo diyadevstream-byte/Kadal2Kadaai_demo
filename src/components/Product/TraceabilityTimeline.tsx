@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { Boat, ShieldCheck, Snowflake, Truck } from 'lucide-react';
+import { Ship, ShieldCheck, Snowflake, Truck } from 'lucide-react';
 
 export default function TraceabilityTimeline() {
   const steps = [
@@ -7,7 +7,7 @@ export default function TraceabilityTimeline() {
       time: '0h',
       label: 'Ocean Capture',
       desc: 'Sourced from the deep coral zones of the Indian Ocean.',
-      icon: Boat,
+      icon: Ship,
       color: 'primary'
     },
     {
