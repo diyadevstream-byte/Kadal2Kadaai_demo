@@ -25,9 +25,10 @@ export default function ImageGallery({ fish }: { fish: any }) {
       </div>
 
       {/* Main image container */}
-      <div className="md:col-span-12 lg:col-span-10 relative bg-surface-container-low/10 rounded-[4rem] overflow-hidden border border-white/5 flex items-center justify-center p-4 group shadow-2xl" style={{ aspectRatio: '16/10' }}>
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-transparent to-primary/10 opacity-40" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-primary/10 rounded-full blur-[160px] pointer-events-none" />
+      <div className="md:col-span-12 lg:col-span-10 relative bg-surface-container-low/10 rounded-[5rem] overflow-hidden border border-white/5 flex items-center justify-center p-0 group shadow-2xl transition-all duration-700 hover:border-primary/20" style={{ aspectRatio: '16/9' }}>
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-primary/10 opacity-30" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-primary/15 rounded-full blur-[180px] pointer-events-none animate-pulse" />
+
 
         <div className="absolute top-8 left-8 z-20">
           <div className="px-5 py-2.5 bg-black/40 backdrop-blur-2xl border border-white/10 rounded-full flex items-center gap-3 shadow-2xl">
@@ -42,8 +43,9 @@ export default function ImageGallery({ fish }: { fish: any }) {
           initial={{ opacity: 0, scale: 0.98 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8 }}
-          className="relative z-10 w-full h-full object-contain p-4 drop-shadow-[0_50px_100px_rgba(0,0,0,0.95)] group-hover:scale-[1.05] transition-transform duration-1000"
+          className="relative z-10 w-full h-full object-contain p-2 drop-shadow-[0_40px_80px_rgba(0,0,0,0.8)] group-hover:scale-[1.12] transition-transform duration-1000"
           alt={fish.name}
+
           onError={(e) => {
             e.currentTarget.src = 'https://placehold.co/1200x800/03070c/00daf3?text=Image+Load+Failed';
           }}

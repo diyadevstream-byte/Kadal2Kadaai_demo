@@ -10,9 +10,12 @@ import ProductHeader from '../components/Product/ProductHeader';
 import ProductExtendedDetails from '../components/Product/ProductExtendedDetails';
 import PurchaseBox from '../components/Product/PurchaseBox';
 import FlavorRadar from '../components/Product/FlavorRadar';
-import TraceabilityTimeline from '../components/Product/TraceabilityTimeline';
+import OriginJourney from '../components/Product/OriginJourney';
+import DeepSeaSonar from '../components/Product/DeepSeaSonar';
+import { Waves, Thermometer, MapPin } from 'lucide-react';
 
 
+// Product Page - Innovation Layer v2 (Forcing Refresh)
 export default function ProductPage() {
   const { fishName } = useParams();
   const [openFaq, setOpenFaq] = useState<number | null>(0);
@@ -47,12 +50,16 @@ export default function ProductPage() {
 
   return (
     <div className="min-h-screen bg-background relative overflow-hidden text-on-surface">
+      {/* Dynamic Innovation Background Layer */}
+      <DeepSeaSonar />
+
       {/* Deep Sea Ambient Glows */}
       <div className="absolute top-[-5%] left-[-2%] w-[60vw] h-[60vw] bg-primary/10 rounded-full blur-[180px] pointer-events-none" />
       <div className="absolute bottom-[-5%] right-[-2%] w-[50vw] h-[50vw] bg-[#005f73]/15 rounded-full blur-[220px] pointer-events-none" />
 
       {/* GLOBAL LAYOUT CONSTRAINT CONTAINER */}
-      <div className="max-w-[1200px] mx-auto px-8 lg:px-12 relative z-10">
+      <div className="max-w-[1400px] mx-auto px-8 lg:px-12 relative z-10">
+
         
         {/* Decorative Marginal Accents (Hidden on small screens) */}
         <div className="hidden 2xl:block absolute -left-48 top-[40%] text-primary/5 select-none pointer-events-none">
@@ -109,8 +116,30 @@ export default function ProductPage() {
           </div>
         </section>
 
+        {/* MARITIME ORIGIN BRIDGE: Filling the Vertical Gap */}
+        <section className="mb-24 flex flex-wrap lg:flex-nowrap items-stretch gap-8">
+           {[
+             { label: 'Habitat Profile', val: 'Estuarine / Coral', icon: Waves, detail: 'Tidal Mangrove Zones' },
+             { label: 'Sourcing Depth', val: '40m - 120m', icon: Anchor, detail: 'Coastal Shelf Catch' },
+             { label: 'Ambient Thermal', val: '24.5°C Avg', icon: Thermometer, detail: 'Tropical Current' },
+             { label: 'Region Hub', val: 'Kottivakkam Docks', icon: MapPin, detail: 'Landing Center #4' }
+           ].map((stat, i) => (
+             <div key={i} className="flex-1 min-w-[240px] bg-surface-container-low/40 backdrop-blur-xl p-10 rounded-[3rem] border border-white/5 flex items-center gap-8 group hover:bg-surface-container transition-all duration-500">
+                <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center border border-primary/20 group-hover:scale-110 transition-transform">
+                   <stat.icon className="w-8 h-8 text-primary" />
+                </div>
+                <div className="flex flex-col gap-1">
+                   <span className="text-[10px] font-black uppercase tracking-widest text-on-surface-variant/40">{stat.label}</span>
+                   <span className="text-xl font-black text-white">{stat.val}</span>
+                   <span className="text-[10px] text-primary/60 font-medium uppercase tracking-widest">{stat.detail}</span>
+                </div>
+             </div>
+           ))}
+        </section>
+
         {/* BOTTOM SECTION: INTEL GRID */}
         <section className="pb-32">
+
            <div className="border-t border-white/5 pt-20">
               <h3 className="font-headline text-[10px] font-black uppercase tracking-[0.6em] text-primary/30 mb-16 text-center lg:text-left">Omni-Channel Quality Report</h3>
               
@@ -133,17 +162,17 @@ export default function ProductPage() {
                        <div className="flex items-center gap-3">
                           <Star className="w-5 h-5 fill-primary text-primary" />
                           <span className="text-[10px] uppercase font-black text-white tracking-[0.3em]">QC Verified</span>
-                       </div>
-                       <p className="text-xl font-black text-white leading-snug">Hand-inspected for absolute oceanic purity.</p>
-                       <div className="pt-6 border-t border-white/10 text-[10px] text-primary font-black uppercase tracking-widest">ISO 22000 Certified</div>
-                    </div>
-                 </div>
-              </div>
-           </div>
+                        </div>
+                        <p className="text-xl font-black text-white leading-snug">Hand-inspected for absolute oceanic purity.</p>
+                        <div className="pt-6 border-t border-white/10 text-[10px] text-primary font-black uppercase tracking-widest">ISO 22000 Certified</div>
+                     </div>
+                  </div>
+               </div>
+            </div>
         </section>
 
-        {/* Traceability Innovation Layer */}
-        <TraceabilityTimeline />
+        {/* Origin Innovation Layer */}
+        <OriginJourney />
 
         {/* Frequently Bought Together */}
         <section className="pb-32 pt-20 border-t border-white/5 mt-10">
