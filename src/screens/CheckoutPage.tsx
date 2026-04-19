@@ -1,46 +1,55 @@
 import { useState } from 'react';
 import { useCart, CartItem } from '../context/CartContext';
-import { MapPin, Clock, CreditCard, ShoppingBag, CheckCircle2, ChevronRight, User, Phone, Trash2, Plus, Minus, ArrowLeft, Zap, Flame, ThermometerSnowflake, ShieldCheck, Info } from 'lucide-react';
+import { MapPin, Clock, CreditCard, ShoppingBag, CheckCircle2, User, Phone, Trash2, Plus, Minus, ArrowLeft, Zap, Flame, ThermometerSnowflake, ShieldCheck, Info, Leaf, Sparkles, Scale, Heart } from 'lucide-react';
 import { useNavigate, Link } from 'react-router-dom';
 import OceanButton from '../components/OceanButton';
+import SeaLifeCanvas from '../components/SeaLifeCanvas';
+import SignatureDishCard from '../components/SignatureDishCard';
 import { motion, AnimatePresence } from 'motion/react';
 
 // Meta-data helper for fish categories
-const FISH_METADATA: Record<string, { benefits: string[], tips: string, freshness: string }> = {
+const FISH_METADATA: Record<string, { benefits: string[], tips: string, hacks: string, freshness: string }> = {
   "Marine fish": {
     benefits: ["Rich in Omega-3", "Heart Healthy", "Premium Protein"],
     tips: "Tastes best when pan-seared with butter & herbs.",
-    freshness: "Deep-sea catch, chilled at 2°C since harvest."
+    hacks: "Add a splash of lemon juice while cooking to keep the meat firm.",
+    freshness: "Deep-sea catch, boat-to-dock in 6 hours."
   },
   "freshwater fish": {
     benefits: ["High Lean Protein", "Easy to Digest", "Low Calorie"],
     tips: "Perfect for traditional spicy curries or deep frying.",
-    freshness: "Farm-to-door in 12 hours. Pure & antibiotic-free."
+    hacks: "Marinate with turmeric and salt for 15 mins to reduce moisture.",
+    freshness: "Farm-harvested daily. Flash-chilled immediately."
   },
   "Brackish Water Fish": {
     benefits: ["Naturally Sweet Meat", "Potassium-Rich", "Zero Antibiotics"],
     tips: "Excellent for grilling or steaming with ginger.",
-    freshness: "Sourced from pristine backwaters at dawn."
+    hacks: "Score the skin slightly to let spices penetrate deeper.",
+    freshness: "Sourced from pristine local backwaters."
   },
   "Crabs": {
     benefits: ["B-12 Powerhouse", "Zinc & Selenium", "Very Low Fat"],
     tips: "Steam for 10-12 mins to retain natural sweetness.",
-    freshness: "Live caught, packed with ocean-state moisture."
+    hacks: "Freeze for 10 mins before cleaning to lock in flavor.",
+    freshness: "Live caught, packed in chilled humidity."
   },
   "Freashwater Prawn": {
     benefits: ["Phosphorus-rich", "Muscle Recovery", "Heart Friendly"],
     tips: "Avoid overcooking; sauté for just 3-4 mins.",
-    freshness: "Ponds harvested daily. Flash-chilled immediately."
+    hacks: "Cook with shells on for a deeper, nuttier flavor profile.",
+    freshness: "Harvested at dawn, delivered by noon."
   },
   "Shellfish": {
     benefits: ["Iron Booster", "Healthy Magnesium", "Amino Acids"],
     tips: "Scrub well and steam until shells open wide.",
-    freshness: "Morning harvest, inspected for peak purity."
+    hacks: "Discard any shells that don't open after cooking.",
+    freshness: "Morning inspection for peak purity labels."
   },
   "default": {
     benefits: ["Premium Protein", "Omega-3 Rich", "Daily Nutrition"],
     tips: "Keep refrigerated and consume within 24 hours.",
-    freshness: "Sourced directly from coastal hubs."
+    hacks: "Store in the coldest part of your fridge (0-2°C).",
+    freshness: "Sourced directly from certified coastal hubs."
   }
 };
 
@@ -65,26 +74,11 @@ export default function CheckoutPage() {
   const taxAmount = Math.round(cartTotal * 0.05); // 5% GST
   const finalTotal = cartTotal + deliveryFee + taxAmount;
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-    if (error) setError('');
-  };
-
-  const validateForm = () => {
-    if (!formData.fullName.trim()) return "Please enter your full name";
-    if (!formData.phone.trim()) return "Please enter a valid phone number";
-    if (!formData.address.trim()) return "Shipping address is required";
-    return null;
-  };
-
   const handlePlaceOrder = () => {
-    const validationError = validateForm();
-    if (validationError) {
-      setError(validationError);
+    if (!formData.fullName.trim() || !formData.phone.trim() || !formData.address.trim()) {
+      setError("Please complete all delivery details");
       return;
     }
-
     setIsOrdered(true);
     setTimeout(() => {
       clearCart();
@@ -92,31 +86,33 @@ export default function CheckoutPage() {
     }, 3000);
   };
 
-  // Convert USD to INR (For display only, assuming JSON is already in INR-representative values)
   const formatPrice = (amount: number) => `₹ ${amount.toLocaleString()}`;
 
   if (cart.length === 0 && !isOrdered) {
     return (
-      <div className="min-h-[80vh] bg-surface flex flex-col items-center justify-center p-6 text-center">
+      <div className="min-h-[90vh] bg-[#FAF7F2] flex flex-col items-center justify-center p-6 text-center relative overflow-hidden">
+        <SeaLifeCanvas />
         <motion.div 
-          initial={{ y: 20, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          className="flex flex-col items-center gap-8 max-w-lg"
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          className="flex flex-col items-center gap-10 max-w-xl z-10"
         >
-          <div className="w-32 h-32 rounded-full bg-primary/10 flex items-center justify-center relative">
-             <ShoppingBag className="w-12 h-12 text-primary opacity-40" />
-             <div className="absolute -top-1 -right-1 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center">
-                 <Trash2 className="w-6 h-6 text-error opacity-20" />
+          <div className="w-40 h-40 rounded-[3rem] bg-primary/10 flex items-center justify-center relative shadow-2xl shadow-primary/5">
+             <ShoppingBag className="w-16 h-16 text-primary opacity-40" />
+             <div className="absolute -top-4 -right-4 w-16 h-16 bg-white rounded-full shadow-lg flex items-center justify-center border-4 border-[#FAF7F2]">
+                 <motion.div animate={{ rotate: [0, -10, 10, 0] }} transition={{ repeat: Infinity, duration: 2 }}>
+                    <Scale className="w-7 h-7 text-primary" />
+                 </motion.div>
              </div>
           </div>
-          <div className="flex flex-col gap-3">
-            <h1 className="font-headline text-4xl font-black text-on-surface uppercase tracking-tight">Your boat is empty</h1>
-            <p className="text-on-surface-variant font-bold leading-relaxed">
-              Don't wait for the tide to turn! Add some high-quality, fresh seafood to your cart to proceed with checkout.
+          <div className="flex flex-col gap-4">
+            <h1 className="font-headline text-5xl font-black text-[#2D2321] uppercase tracking-tighter">Your Boat is Empty</h1>
+            <p className="text-[#5D4037] font-bold text-lg leading-relaxed px-6">
+              The tide is high and the catch is fresh! Don't let the best items swim away—head back to the market to fill your net.
             </p>
           </div>
           <Link to="/marketplace">
-            <OceanButton className="px-12 h-16 rounded-2xl bg-primary text-white font-black uppercase tracking-widest text-sm shadow-xl shadow-primary/20">
+            <OceanButton className="px-12 h-20 rounded-[2rem] bg-primary text-white font-black uppercase tracking-widest text-sm shadow-2xl shadow-primary/20 hover:scale-105 transition-transform active:scale-95">
               Explore Fresh Catch
             </OceanButton>
           </Link>
@@ -127,286 +123,235 @@ export default function CheckoutPage() {
 
   if (isOrdered) {
     return (
-      <div className="min-h-[80vh] flex flex-col items-center justify-center gap-8 px-6 text-center bg-surface">
-        <motion.div 
-          initial={{ scale: 0.8, opacity: 0 }} 
-          animate={{ scale: 1, opacity: 1 }}
-          className="w-28 h-28 rounded-[2.5rem] bg-primary/20 flex items-center justify-center text-primary shadow-[0_0_80px_rgba(230,81,0,0.3)]"
-        >
-          <CheckCircle2 className="w-14 h-14" />
+      <div className="min-h-screen flex flex-col items-center justify-center bg-[#FAF7F2] relative">
+        <SeaLifeCanvas />
+        <motion.div initial={{ y: 50, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="flex flex-col items-center gap-10 text-center z-10">
+          <div className="w-32 h-32 rounded-[2.5rem] bg-primary/20 flex items-center justify-center text-primary shadow-[0_0_80px_rgba(230,81,0,0.3)]">
+            <CheckCircle2 className="w-16 h-16" />
+          </div>
+          <div className="flex flex-col gap-4 px-6">
+            <h1 className="font-headline text-5xl font-black text-[#2D2321] uppercase tracking-tighter">Harvest Secured!</h1>
+            <p className="text-[#5D4037] font-bold text-lg max-w-sm mx-auto">
+              Your seafood is being prioritized for dispatch. Get the kitchen ready!
+            </p>
+          </div>
+          <div className="w-64 h-2 bg-surface-container rounded-full overflow-hidden">
+             <motion.div initial={{ x: "-100%" }} animate={{ x: "0%" }} transition={{ duration: 3 }} className="w-full h-full bg-primary" />
+          </div>
         </motion.div>
-        <div className="flex flex-col gap-4">
-          <h1 className="font-headline text-4xl font-black text-on-surface uppercase tracking-tight">Catch Secured!</h1>
-          <p className="text-on-surface-variant font-bold max-w-sm mx-auto leading-relaxed">
-            Order confirmed for {formData.fullName}. Our dispatch hub is preparing your seafood for specialized cold-chain delivery.
-          </p>
-        </div>
-        <div className="flex flex-col gap-2">
-           <p className="text-[10px] font-black uppercase tracking-[0.5em] text-primary animate-pulse">Navigating to Home</p>
-           <div className="w-48 h-1 bg-surface-container rounded-full overflow-hidden">
-             <motion.div 
-               initial={{ x: "-100%" }}
-               animate={{ x: "0%" }}
-               transition={{ duration: 3 }}
-               className="w-full h-full bg-primary"
-             />
-           </div>
-        </div>
       </div>
     );
   }
 
   return (
-    <div className="bg-surface min-h-screen">
-      <div className="max-w-[1400px] mx-auto px-6 lg:px-12 py-12 lg:py-20 flex flex-col gap-12">
+    <div className="bg-[#FAF7F2] min-h-screen relative overflow-hidden">
+      {/* 3D Animation Background */}
+      <SeaLifeCanvas />
+      
+      <div className="max-w-[1440px] mx-auto px-6 lg:px-12 py-12 lg:py-24 flex flex-col gap-12 relative z-10">
         
-        <div className="flex flex-col gap-3">
-          <Link to="/marketplace" className="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors font-bold text-xs uppercase tracking-widest">
-            <ArrowLeft className="w-4 h-4" /> Go back to Market
+        {/* Page Header */}
+        <div className="flex flex-col gap-4">
+          <Link to="/marketplace" className="flex items-center gap-2 text-[#5D4037] hover:text-primary transition-colors font-black text-xs uppercase tracking-[0.3em]">
+            <ArrowLeft className="w-4 h-4" /> Market Return
           </Link>
-          <div className="flex items-center gap-6 mt-4">
-            <h1 className="font-headline text-5xl font-black text-on-surface tracking-tighter uppercase leading-none">Checkout</h1>
-            <div className="hidden sm:flex items-center gap-2 px-4 h-8 rounded-full bg-primary/10 border border-primary/20 text-primary font-black text-[10px] uppercase tracking-widest">
-               <ShieldCheck className="w-3.5 h-3.5" /> Secure Market Channel
-            </div>
-          </div>
+          <h1 className="font-headline text-6xl font-black text-[#2D2321] tracking-tighter uppercase leading-tight">Checkout</h1>
         </div>
 
-        <div className="grid grid-cols-1 xl:grid-cols-[1fr_450px] gap-12 items-start">
+        {/* TOP SECTION: Signature Dish */}
+        <div className="flex flex-col gap-6">
+           <div className="flex items-center justify-between px-2">
+              <h3 className="font-headline text-lg font-black text-[#2D2321] uppercase tracking-[0.2em] flex items-center gap-3">
+                 <Sparkles className="w-5 h-5 text-primary" /> Chef's Signature Selection
+              </h3>
+           </div>
+           <SignatureDishCard />
+        </div>
+
+        <div className="grid grid-cols-1 xl:grid-cols-[1fr_480px] gap-12 items-start">
           
-          {/* LEFT: Checkout Deck */}
-          <div className="flex flex-col gap-8">
+          {/* CONTENT: Forms & Progress */}
+          <div className="flex flex-col gap-10">
             
-            {/* 1. Delivery & Contact Identity */}
-            <section className="bg-white rounded-[3rem] p-8 lg:p-12 border border-outline-variant/10 shadow-sm flex flex-col gap-10">
-              <div className="flex items-center gap-4">
-                 <div className="w-12 h-12 rounded-2xl bg-surface-container flex items-center justify-center font-headline font-black text-xl text-primary border border-outline-variant/10">01</div>
-                 <h2 className="font-headline text-2xl font-black text-on-surface tracking-tight uppercase">Billing & Identity</h2>
-              </div>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                 <div className="flex flex-col gap-3">
-                    <label className="font-label text-xs uppercase tracking-widest text-on-surface-variant font-black">Full Name</label>
-                    <div className="relative group">
-                       <User className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-on-surface-variant/40 group-focus-within:text-primary transition-colors" />
-                       <input 
-                        name="fullName"
-                        value={formData.fullName}
-                        onChange={handleInputChange}
-                        className="w-full h-16 bg-surface-container rounded-2xl pl-13 pr-6 border border-outline-variant/10 focus:border-primary focus:ring-4 focus:ring-primary/5 transition-all font-body text-sm text-on-surface font-black outline-none placeholder:font-normal" 
-                        placeholder="John Oceanic" 
-                       />
-                    </div>
-                 </div>
-                 <div className="flex flex-col gap-3">
-                    <label className="font-label text-xs uppercase tracking-widest text-on-surface-variant font-black">Contact Number</label>
-                    <div className="relative group">
-                       <Phone className="absolute left-5 top-1/2 -translate-y-1/2 w-4 h-4 text-on-surface-variant/40 group-focus-within:text-primary transition-colors" />
-                       <input 
-                        name="phone"
-                        type="tel"
-                        value={formData.phone}
-                        onChange={handleInputChange}
-                        className="w-full h-16 bg-surface-container rounded-2xl pl-13 pr-6 border border-outline-variant/10 focus:border-primary focus:ring-4 focus:ring-primary/5 transition-all font-body text-sm text-on-surface font-black outline-none placeholder:font-normal" 
-                        placeholder="+91 88888 00000" 
-                       />
-                    </div>
-                 </div>
-                 <div className="md:col-span-2 flex flex-col gap-3">
-                    <label className="font-label text-xs uppercase tracking-widest text-on-surface-variant font-black">Precise Shipping Address</label>
-                    <div className="relative group">
-                       <MapPin className="absolute left-5 top-6 w-4 h-4 text-on-surface-variant/40 group-focus-within:text-primary transition-colors" />
-                       <textarea 
-                        name="address"
-                        value={formData.address}
-                        onChange={handleInputChange}
-                        className="w-full h-32 bg-surface-container rounded-3xl pl-13 pr-6 py-5 border border-outline-variant/10 focus:border-primary focus:ring-4 focus:ring-primary/5 transition-all font-body text-sm text-on-surface font-black outline-none resize-none placeholder:font-normal" 
-                        placeholder="House No, Street, Landmarks, City, PIN..." 
-                       />
-                    </div>
-                 </div>
-              </div>
+            {/* Delivery Card */}
+            <section className="bg-white rounded-[3.5rem] p-8 lg:p-12 border border-outline-variant/10 shadow-sm flex flex-col gap-12">
+               <div className="flex items-center gap-6">
+                  <div className="w-14 h-14 rounded-3xl bg-[#F3EFE6] flex items-center justify-center font-headline font-black text-2xl text-primary border border-outline-variant/5">01</div>
+                  <div className="flex flex-col">
+                     <h2 className="font-headline text-3xl font-black text-[#2D2321] tracking-tight uppercase">Billing Hub</h2>
+                     <p className="text-[10px] font-black uppercase tracking-widest text-[#5D4037] opacity-60">Verified Marine Buyer Profile</p>
+                  </div>
+               </div>
+
+               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="flex flex-col gap-3">
+                     <label className="font-label text-[10px] uppercase tracking-[0.2em] text-[#5D4037] font-black">Full Name</label>
+                     <input 
+                      value={formData.fullName}
+                      onChange={(e) => setFormData(p => ({ ...p, fullName: e.target.value }))}
+                      className="w-full h-16 bg-[#FAF7F2] rounded-2xl px-6 border border-outline-variant/5 focus:border-primary transition-all font-body text-sm text-[#2D2321] font-black outline-none" 
+                      placeholder="Alex Ocean" 
+                     />
+                  </div>
+                  <div className="flex flex-col gap-3">
+                     <label className="font-label text-[10px] uppercase tracking-[0.2em] text-[#5D4037] font-black">Contact Number</label>
+                     <input 
+                      value={formData.phone}
+                      onChange={(e) => setFormData(p => ({ ...p, phone: e.target.value }))}
+                      className="w-full h-16 bg-[#FAF7F2] rounded-2xl px-6 border border-outline-variant/5 focus:border-primary transition-all font-body text-sm text-[#2D2321] font-black outline-none" 
+                      placeholder="+91 0000 0000" 
+                     />
+                  </div>
+                  <div className="md:col-span-2 flex flex-col gap-3">
+                     <label className="font-label text-[10px] uppercase tracking-[0.2em] text-[#5D4037] font-black">Precise Docking Address</label>
+                     <textarea 
+                      value={formData.address}
+                      onChange={(e) => setFormData(p => ({ ...p, address: e.target.value }))}
+                      className="w-full h-32 bg-[#FAF7F2] rounded-3xl px-6 py-5 border border-outline-variant/5 focus:border-primary transition-all font-body text-sm text-[#2D2321] font-black outline-none resize-none" 
+                      placeholder="House, Street, Area, Landmarks..." 
+                     />
+                  </div>
+               </div>
             </section>
 
-            {/* 2. Dispatch Timings */}
-            <section className="bg-white rounded-[3rem] p-8 lg:p-12 border border-outline-variant/10 shadow-sm flex flex-col gap-10">
-              <div className="flex items-center gap-4">
-                 <div className="w-12 h-12 rounded-2xl bg-surface-container flex items-center justify-center font-headline font-black text-xl text-primary border border-outline-variant/10">02</div>
-                 <div className="flex flex-col">
-                    <h2 className="font-headline text-2xl font-black text-on-surface tracking-tight uppercase">Express Cold Chain Slot</h2>
-                    <p className="text-[10px] text-primary font-black uppercase tracking-widest flex items-center gap-1"><ThermometerSnowflake className="w-3 h-3" /> Chilled Logistics Guaranteed</p>
-                 </div>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+            {/* Logistics Card */}
+            <section className="bg-white rounded-[3.5rem] p-8 lg:p-12 border border-outline-variant/10 shadow-sm flex flex-col gap-10">
+               <div className="flex items-center gap-6">
+                  <div className="w-14 h-14 rounded-3xl bg-[#F3EFE6] flex items-center justify-center font-headline font-black text-2xl text-primary border border-outline-variant/5">02</div>
+                  <h2 className="font-headline text-3xl font-black text-[#2D2321] tracking-tight uppercase">Express Logistics</h2>
+               </div>
+               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
                  {[
-                   { id: 'morning', label: 'Sunrise Batch', time: '6 AM - 9 AM', icon: <Clock className="w-4 h-4" /> },
-                   { id: 'afternoon', label: 'Mid-Day Cool', time: '12 PM - 3 PM', icon: <Clock className="w-4 h-4" /> },
-                   { id: 'evening', label: 'Sunset Express', time: '6 PM - 9 PM', icon: <Clock className="w-4 h-4" /> }
-                 ].map((slot) => (
+                   { id: 'morning', label: 'Sunrise Batch', time: '6-9 AM' },
+                   { id: 'afternoon', label: 'Noon Chilled', time: '1-4 PM' },
+                   { id: 'evening', label: 'Night Catch', time: '7-10 PM' }
+                 ].map((s) => (
                     <button 
-                      key={slot.id}
-                      onClick={() => setDeliverySlot(slot.id)}
-                      className={`flex flex-col gap-2 p-6 rounded-3xl border-2 transition-all text-left relative group ${deliverySlot === slot.id ? 'bg-primary border-primary text-white shadow-xl shadow-primary/20 scale-[1.02]' : 'bg-surface-container border-transparent text-on-surface-variant hover:border-outline-variant/30'}`}
+                      key={s.id} 
+                      onClick={() => setDeliverySlot(s.id)}
+                      className={`flex flex-col gap-2 p-6 rounded-3xl transition-all text-left border-3 ${deliverySlot === s.id ? 'bg-primary border-primary shadow-xl shadow-primary/20 scale-[1.05]' : 'bg-[#FAF7F2] border-transparent'}`}
                     >
-                       <span className={`font-headline font-black uppercase tracking-widest text-[11px] mb-1 ${deliverySlot === slot.id ? 'text-white' : 'text-on-surface'}`}>{slot.label}</span>
-                       <span className={`text-[10px] font-bold flex items-center gap-2 ${deliverySlot === slot.id ? 'text-white/80' : 'opacity-60'}`}>{slot.icon} {slot.time}</span>
-                       {deliverySlot === slot.id && <div className="absolute top-4 right-4"><CheckCircle2 className="w-5 h-5 text-white" /></div>}
+                       <span className={`font-headline font-black uppercase tracking-widest text-[11px] ${deliverySlot === s.id ? 'text-white' : 'text-[#2D2321]'}`}>{s.label}</span>
+                       <span className={`text-[10px] font-bold ${deliverySlot === s.id ? 'text-white/80' : 'text-[#5D4037] opacity-60'}`}>{s.time}</span>
                     </button>
                  ))}
-              </div>
-            </section>
-
-            {/* 3. Secure Treasury (Payment) */}
-            <section className="bg-white rounded-[3rem] p-8 lg:p-12 border border-outline-variant/10 shadow-sm flex flex-col gap-10">
-              <div className="flex items-center gap-4">
-                 <div className="w-12 h-12 rounded-2xl bg-surface-container flex items-center justify-center font-headline font-black text-xl text-primary border border-outline-variant/10">03</div>
-                 <h2 className="font-headline text-2xl font-black text-on-surface tracking-tight uppercase">Payment Vault</h2>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                 {[
-                   { id: 'cod', label: 'Cash / Pay on Door', sub: 'Coastal Cash', icon: <MapPin className="w-5 h-5" /> },
-                   { id: 'upi', label: 'UPI / Scan & Pay', sub: 'Instant Transfer', icon: <Zap className="w-5 h-5" /> },
-                   { id: 'card', label: 'Credit & Debit', sub: 'Secure Network', icon: <CreditCard className="w-5 h-5" /> }
-                 ].map((method) => (
-                    <button 
-                      key={method.id}
-                      onClick={() => setPaymentMethod(method.id)}
-                      className={`flex items-center gap-4 p-6 rounded-3xl border-2 transition-all text-left relative overflow-hidden group ${paymentMethod === method.id ? 'bg-white border-primary shadow-lg shadow-primary/5' : 'bg-surface-container border-transparent text-on-surface-variant'}`}
-                    >
-                       <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-colors ${paymentMethod === method.id ? 'bg-primary text-white' : 'bg-white text-on-surface-variant'}`}>
-                          {method.icon}
-                       </div>
-                       <div className="flex flex-col">
-                          <span className={`font-headline font-black uppercase tracking-tighter text-sm ${paymentMethod === method.id ? 'text-primary' : 'text-on-surface'}`}>{method.label}</span>
-                          <span className="text-[10px] font-bold opacity-50 uppercase tracking-widest">{method.sub}</span>
-                       </div>
-                    </button>
-                 ))}
-              </div>
+               </div>
             </section>
           </div>
 
-          {/* RIGHT: Fresh Order Sidebar */}
+          {/* SIDEBAR: Order Intelligence */}
           <div className="flex flex-col gap-8 lg:sticky lg:top-32">
-             <div className="bg-white rounded-[3.5rem] p-8 lg:p-12 border border-outline-variant/10 shadow-2xl flex flex-col gap-10 relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full -translate-y-16 translate-x-16 border border-primary/10" />
+             <div className="bg-white rounded-[4rem] p-8 lg:p-12 border border-outline-variant/10 shadow-2xl flex flex-col gap-10">
+                <h2 className="font-headline text-3xl font-black text-[#2D2321] px-2 uppercase tracking-tighter">Your Feast Summary</h2>
                 
-                <h2 className="font-headline text-3xl font-black text-on-surface px-2 uppercase tracking-tighter">The Daily Catch</h2>
-                
-                <div className="flex flex-col gap-8 max-h-[500px] overflow-y-auto px-2 custom-scrollbar pr-4">
+                <div className="flex flex-col gap-10 overflow-y-auto max-h-[600px] pr-4 custom-scrollbar">
                   <AnimatePresence mode="popLayout">
                     {cart.map((item) => {
-                        const facts = getFishFacts(item.image.split('/')[2]); // Try to get by category name from path
+                        const facts = getFishFacts(item.image.split('/')[2]);
                         return (
                           <motion.div 
-                            key={`${item.id}-${item.cutType}-${item.weight}`}
+                            key={`${item.id}-${item.cutType}`}
                             layout
-                            initial={{ opacity: 0, x: 20 }}
+                            initial={{ opacity: 0, x: 10 }}
                             animate={{ opacity: 1, x: 0 }}
-                            exit={{ opacity: 0, x: -20 }}
-                            className="flex flex-col gap-5 p-6 rounded-[2rem] bg-surface-container border border-outline-variant/5 group hover:border-primary/20 transition-all shadow-sm hover:shadow-lg"
+                            className="flex flex-col gap-5 bg-[#FAF7F2] p-6 rounded-[2.5rem] border border-outline-variant/5 group"
                           >
-                            <div className="flex items-center gap-5">
-                              <div className="w-20 h-20 rounded-2xl bg-white border border-outline-variant/10 overflow-hidden shrink-0 shadow-sm">
-                                  <img src={item.image} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                              </div>
-                              <div className="flex-1 flex flex-col gap-1">
-                                  <div className="flex items-center justify-between">
-                                     <span className="text-base font-black text-on-surface uppercase tracking-tighter leading-none">{item.name}</span>
-                                     <button onClick={() => removeFromCart(item.id, item.cutType, item.weight)} className="text-on-surface-variant/30 hover:text-error transition-colors"><Trash2 className="w-4 h-4" /></button>
-                                  </div>
-                                  <div className="flex items-center gap-2 mt-1">
-                                     <span className="px-2 py-0.5 rounded-full bg-primary/10 text-primary font-black text-[9px] uppercase tracking-widest">Fresh Catch</span>
-                                     <span className="px-2 py-0.5 rounded-full bg-surface-container-highest text-on-surface-variant font-black text-[9px] uppercase tracking-widest">{item.weight} Portions</span>
-                                  </div>
-                              </div>
-                            </div>
+                             <div className="flex items-center gap-5">
+                                <div className="w-20 h-20 rounded-2xl overflow-hidden bg-white shadow-sm border border-outline-variant/5">
+                                   <img src={item.image} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+                                </div>
+                                <div className="flex-1 flex flex-col gap-1">
+                                   <div className="flex items-center justify-between">
+                                      <h4 className="text-base font-black text-[#2D2321] uppercase tracking-tighter">{item.name}</h4>
+                                      <button onClick={() => removeFromCart(item.id, item.cutType, item.weight)} className="text-error/40 hover:text-error transition-colors"><Trash2 className="w-4 h-4" /></button>
+                                   </div>
+                                   <div className="flex items-center gap-2">
+                                      <span className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-primary/10 text-primary font-black text-[8px] uppercase tracking-widest">
+                                         <Leaf className="w-2.5 h-2.5" /> {facts.freshness}
+                                      </span>
+                                   </div>
+                                </div>
+                             </div>
 
-                            {/* Nutrition & Tips Info Section */}
-                            <div className="flex flex-col gap-4 py-4 border-t border-outline-variant/10">
-                               <div className="flex flex-wrap gap-2">
-                                  {facts.benefits.map((b, i) => (
-                                     <span key={i} className="flex items-center gap-1.5 text-[10px] font-black text-on-surface-variant/70 uppercase tracking-widest bg-white border border-outline-variant/5 px-2.5 py-1.5 rounded-xl">
-                                        <div className="w-1 h-1 rounded-full bg-primary" /> {b}
-                                     </span>
-                                  ))}
-                               </div>
-                               <div className="flex gap-3 bg-white/50 p-4 rounded-2xl border border-outline-variant/5">
-                                  <div className="w-8 h-8 rounded-xl bg-primary/10 flex items-center justify-center shrink-0"><Flame className="w-4 h-4 text-primary" /></div>
-                                  <div className="flex flex-col gap-1">
-                                     <span className="text-[10px] font-black uppercase tracking-widest text-on-surface-variant">Chef's Advice</span>
-                                     <p className="text-[10px] font-bold text-on-surface/70 leading-relaxed uppercase">{facts.tips}</p>
-                                  </div>
-                               </div>
-                            </div>
+                             {/* Nutrition & Hacks */}
+                             <div className="flex flex-col gap-4 py-4 border-y border-outline-variant/10 border-dotted">
+                                <div className="flex gap-2">
+                                   {facts.benefits.slice(0, 2).map((b, i) => (
+                                      <div key={i} className="flex items-center gap-1.5 px-2 py-1 bg-white border border-outline-variant/5 rounded-lg">
+                                         <div className="w-1 h-1 rounded-full bg-primary" />
+                                         <span className="text-[9px] font-black text-[#5D4037] uppercase tracking-widest">{b}</span>
+                                      </div>
+                                   ))}
+                                </div>
+                                <div className="p-4 bg-white/50 rounded-2xl flex gap-3 border border-outline-variant/5">
+                                   <Flame className="w-4 h-4 text-primary shrink-0" />
+                                   <div className="flex flex-col">
+                                      <span className="text-[9px] font-black uppercase text-[#2D2321] leading-none mb-1">Culinary Hack</span>
+                                      <p className="text-[9px] font-bold text-[#5D4037] leading-relaxed uppercase">{facts.hacks}</p>
+                                   </div>
+                                </div>
+                             </div>
 
-                            <div className="flex items-center justify-between pt-2 border-t border-outline-variant/10">
-                               <div className="flex items-center gap-5">
-                                  <div className="flex items-center gap-3">
-                                     <button onClick={() => updateQuantity(item.id, item.cutType, item.weight, item.quantity - 1)} className="w-7 h-7 rounded-xl bg-white border border-outline-variant/10 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors"><Minus className="w-4 h-4" /></button>
-                                     <span className="text-xs font-black text-on-surface w-4 text-center">{item.quantity}</span>
-                                     <button onClick={() => updateQuantity(item.id, item.cutType, item.weight, item.quantity + 1)} className="w-7 h-7 rounded-xl bg-white border border-outline-variant/10 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors"><Plus className="w-4 h-4" /></button>
-                                  </div>
-                               </div>
-                               <div className="flex flex-col items-end">
-                                  <span className="text-xs font-bold text-on-surface-variant/40 line-through">₹{(item.price * 1.2 * item.quantity).toFixed(0)}</span>
-                                  <span className="text-base font-black text-primary leading-none uppercase">{formatPrice(item.price * item.quantity)}</span>
-                               </div>
-                            </div>
+                             <div className="flex items-center justify-between">
+                                <div className="flex items-center gap-3">
+                                   <button onClick={() => updateQuantity(item.id, item.cutType, item.weight, item.quantity - 1)} className="w-8 h-8 rounded-xl bg-white border border-outline-variant/5 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors"><Minus className="w-4 h-4" /></button>
+                                   <span className="text-xs font-black text-[#2D2321] w-4 text-center">{item.quantity}</span>
+                                   <button onClick={() => updateQuantity(item.id, item.cutType, item.weight, item.quantity + 1)} className="w-8 h-8 rounded-xl bg-white border border-outline-variant/5 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors"><Plus className="w-4 h-4" /></button>
+                                </div>
+                                <div className="flex flex-col items-end">
+                                   <span className="text-[10px] font-black text-on-surface-variant/40 uppercase tracking-widest">Pricing Unit</span>
+                                   <span className="text-lg font-black text-primary leading-none">{formatPrice(item.price * item.quantity)}</span>
+                                </div>
+                             </div>
                           </motion.div>
-                        );
+                        )
                     })}
                   </AnimatePresence>
                 </div>
 
-                <div className="flex flex-col gap-5 px-4 pt-10 border-t border-outline-variant/10">
-                  <div className="flex justify-between items-center text-xs font-black uppercase tracking-widest">
-                    <span className="text-on-surface-variant">Market Subtotal</span>
-                    <span className="text-on-surface">{formatPrice(cartTotal)}</span>
-                  </div>
-                  <div className="flex justify-between items-center text-xs font-black uppercase tracking-widest">
-                    <span className="text-on-surface-variant">Coastal Delivery</span>
-                    <span className="text-primary">{formatPrice(deliveryFee)}</span>
-                  </div>
-                  <div className="flex justify-between items-center text-xs font-black uppercase tracking-widest">
-                    <span className="text-on-surface-variant">Govt. Tax (GST 5%)</span>
-                    <span className="text-on-surface">{formatPrice(taxAmount)}</span>
-                  </div>
-                  <div className="flex flex-col gap-1 mt-6 pt-6 border-t-2 border-on-surface border-dotted">
-                     <div className="flex justify-between items-end">
-                        <span className="font-headline text-xl font-black text-on-surface tracking-tighter uppercase leading-none">Net Total</span>
-                        <span className="font-headline text-5xl font-black text-primary leading-none tracking-tighter">{formatPrice(finalTotal)}</span>
-                     </div>
-                  </div>
+                {/* Final Breakdown */}
+                <div className="flex flex-col gap-4 pt-4 border-t border-outline-variant/10">
+                   <div className="flex justify-between items-center text-xs font-black uppercase tracking-widest text-[#5D4037]">
+                      <span>Catch Total</span>
+                      <span className="text-[#2D2321]">{formatPrice(cartTotal)}</span>
+                   </div>
+                   <div className="flex justify-between items-center text-xs font-black uppercase tracking-widest text-primary">
+                      <span>Express Shipping</span>
+                      <span>{formatPrice(deliveryFee)}</span>
+                   </div>
+                   <div className="flex justify-between items-center text-xs font-black uppercase tracking-widest text-[#5D4037]">
+                      <span>GST (5%)</span>
+                      <span className="text-[#2D2321]">{formatPrice(taxAmount)}</span>
+                   </div>
+                   <div className="mt-6 flex flex-col gap-1 border-t-4 border-[#2D2321] border-double pt-6">
+                      <div className="flex justify-between items-end">
+                         <span className="font-headline text-xl font-black text-[#2D2321] uppercase tracking-tighter">Amount Payable</span>
+                         <span className="font-headline text-5xl font-black text-primary tracking-tighter leading-none">{formatPrice(finalTotal)}</span>
+                      </div>
+                   </div>
                 </div>
 
-                <div className="flex flex-col gap-4 mt-4">
-                  {error && (
-                    <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="p-4 rounded-2xl bg-error/10 border border-error/20 text-error text-[10px] font-black uppercase tracking-widest text-center flex items-center justify-center gap-2">
-                       <Info className="w-4 h-4" /> {error}
-                    </motion.div>
-                  )}
-                  
+                <div className="flex flex-col gap-4">
+                  {error && <div className="p-4 bg-error/10 border border-error/20 text-error text-[10px] font-black uppercase tracking-widest text-center rounded-2xl">{error}</div>}
                   <OceanButton 
                     onClick={handlePlaceOrder}
-                    className="w-full h-24 rounded-[2.5rem] bg-primary text-white font-headline font-black uppercase tracking-[0.2em] text-sm shadow-2xl shadow-primary/30 relative overflow-hidden group"
+                    className="w-full h-24 rounded-[2.5rem] bg-on-surface text-white font-headline font-black uppercase tracking-[0.25em] text-sm shadow-2xl relative overflow-hidden group"
                   >
-                    <div className="relative z-10 flex flex-col items-center gap-1">
-                       <span className="group-hover:scale-110 transition-transform">Confirm & Harvest</span>
-                       <span className="text-[8px] opacity-60 tracking-[0.4em] font-black">Dispatch to Cold Chain</span>
+                    <div className="relative z-10 flex flex-col items-center">
+                       <span className="group-hover:scale-105 transition-transform">Secure Harvest</span>
+                       <span className="text-[8px] opacity-40 font-black mt-1">Dispatching to Cold Chain</span>
                     </div>
                   </OceanButton>
                 </div>
 
-                <div className="flex flex-col gap-6 mt-6 p-6 rounded-3xl bg-surface-container border border-outline-variant/5">
-                   <div className="flex gap-4">
-                      <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center shrink-0"><CheckCircle2 className="w-5 h-5 text-primary" /></div>
-                      <div className="flex flex-col gap-1">
-                         <span className="text-[10px] font-black uppercase tracking-widest text-on-surface">Coastal Pledge</span>
-                         <p className="text-[10px] font-bold text-on-surface-variant uppercase leading-loose">100% Freshness Guarantee. Sourced from active boat landings within 24 hours of dispatch.</p>
-                      </div>
+                <div className="flex items-center justify-center gap-3 p-6 bg-[#F3EFE6] rounded-[2rem] border border-outline-variant/5">
+                   <ShieldCheck className="w-6 h-6 text-primary" />
+                   <div className="flex flex-col">
+                      <span className="text-[10px] font-black uppercase text-[#2D2321] leading-none mb-1">SeaSafe Checkout</span>
+                      <p className="text-[8px] font-bold text-[#5D4037] leading-relaxed uppercase">256-Bit SSL protection for all maritime transactions.</p>
                    </div>
                 </div>
+
              </div>
           </div>
 
