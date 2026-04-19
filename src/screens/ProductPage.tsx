@@ -9,6 +9,9 @@ import EngagingContent from '../components/Product/EngagingContent';
 import ProductHeader from '../components/Product/ProductHeader';
 import ProductExtendedDetails from '../components/Product/ProductExtendedDetails';
 import PurchaseBox from '../components/Product/PurchaseBox';
+import FlavorRadar from '../components/Product/FlavorRadar';
+import TraceabilityTimeline from '../components/Product/TraceabilityTimeline';
+
 
 export default function ProductPage() {
   const { fishName } = useParams();
@@ -50,6 +53,23 @@ export default function ProductPage() {
 
       {/* GLOBAL LAYOUT CONSTRAINT CONTAINER */}
       <div className="max-w-[1200px] mx-auto px-8 lg:px-12 relative z-10">
+        
+        {/* Decorative Marginal Accents (Hidden on small screens) */}
+        <div className="hidden 2xl:block absolute -left-48 top-[40%] text-primary/5 select-none pointer-events-none">
+           <div className="flex flex-col gap-40 items-center">
+              <Anchor className="w-24 h-24" />
+              <div className="font-headline text-[10px] font-black uppercase tracking-[1em] rotate-90 whitespace-nowrap opacity-40">Coastal Coordinates: 12.92°N, 80.23°E</div>
+              <div className="w-px h-64 bg-gradient-to-b from-primary/20 via-primary/5 to-transparent" />
+           </div>
+        </div>
+        <div className="hidden 2xl:block absolute -right-48 top-[60%] text-primary/5 select-none pointer-events-none">
+           <div className="flex flex-col gap-40 items-center">
+              <div className="w-px h-64 bg-gradient-to-t from-primary/20 via-primary/5 to-transparent" />
+              <div className="font-headline text-[10px] font-black uppercase tracking-[1em] -rotate-90 whitespace-nowrap opacity-40">Grade A Verification Active</div>
+              <Activity className="w-24 h-24" />
+           </div>
+        </div>
+
         
         {/* Breadcrumbs */}
         <nav className="py-10 flex items-center gap-4 text-[10px] uppercase tracking-[0.4em] text-on-surface-variant font-black border-b border-white/5 mb-12">
@@ -105,16 +125,10 @@ export default function ProductPage() {
                     <ProductExtendedDetails fish={fish} />
                  </div>
 
-                 {/* Column 3: Trust Badges */}
+                 {/* Column 3: Innovative Intel */}
                  <div className="w-full max-w-sm flex flex-col gap-10">
-                    <div className="bg-surface-container-low rounded-[3rem] p-12 border border-white/5 shadow-xl flex flex-col gap-8 items-center text-center">
-                       <div className="w-20 h-20 rounded-3xl bg-primary/10 flex items-center justify-center border border-primary/20">
-                          <Anchor className="w-10 h-10 text-primary" />
-                       </div>
-                       <span className="font-headline text-lg font-black text-white leading-tight">Coastal Proximity Direct</span>
-                       <p className="text-sm text-on-surface-variant leading-relaxed">Sourced within 25km to maintain biological peak.</p>
-                    </div>
-
+                    <FlavorRadar />
+                    
                     <div className="bg-gradient-to-br from-surface-container-high to-black rounded-[3rem] p-12 border border-white/5 shadow-2xl flex flex-col gap-8">
                        <div className="flex items-center gap-3">
                           <Star className="w-5 h-5 fill-primary text-primary" />
@@ -127,6 +141,9 @@ export default function ProductPage() {
               </div>
            </div>
         </section>
+
+        {/* Traceability Innovation Layer */}
+        <TraceabilityTimeline />
 
         {/* Frequently Bought Together */}
         <section className="pb-32 pt-20 border-t border-white/5 mt-10">
