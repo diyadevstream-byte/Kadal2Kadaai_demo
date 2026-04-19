@@ -64,6 +64,21 @@ function processFile(category, relativeFilePath, registry) {
   }
 }
 
-const data = parseFishMetadata();
-fs.writeFileSync(OUTPUT_FILE, JSON.stringify(data, null, 2));
+const rawData = parseFishMetadata();
+const formattedData = {};
+
+Object.keys(rawData).forEach(category => {
+  formattedData[category] = Object.values(rawData[category]);
+  // Add some fallback fields that the UI expects
+  formattedData[category].forEach((item, index) => {
+    item.id = `${category.replace(/\s+/g,'').toLowerCase()}-${index}`;
+    item.pricePerKg = item.price;
+    item.image1 = item.primary;
+    item.image2 = item.secondary;
+    item.rating = 4.5;
+    item.reviewsCount = Math.floor(Math.random() * 200) + 10;
+  });
+});
+
+fs.writeFileSync('./src/data/seafoodProducts.json', JSON.stringify(formattedData, null, 2));
 console.log(`Done.`);

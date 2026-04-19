@@ -1,81 +1,60 @@
 /**
- * Parses a list of file paths from a fish marketplace photo directory 
- * and returns a structured object grouped by Category and Fish Name.
- *
- * @param {string[]} filePaths - Array of file paths (e.g., ["photos/Crabs/Blue Crab (1).jpg", ...])
- * @returns {Object} Structured fish data
+ * Parses file paths from a ZIP/directory structure and groups fish images by category and fish name.
+ * 
+ * Expected file path format: "photos/{CategoryName}/{FishName} ({Number}).jpg"
+ * Example: "photos/Seer Fish/Premium Seer (1).jpg"
+ * 
+ * @param {string[]} filePaths - Array of file paths to parse.
+ * @returns {Object} Structured data grouped by Category -> Fish -> [image1, image2]
  */
-export function parseFishMetadata(filePaths) {
-  const registry = {};
+export function parseFishImages(filePaths) {
+  const data = {};
 
-  // Supported image extensions
-  const imageExtensions = /\.(jpe?g|png|webp|gif|avif)$/i;
-
-  filePaths.forEach((path) => {
-    // Only process images
-    if (!imageExtensions.test(path)) return;
-
-    // Normalize path separators
-    const normalizedPath = path.replace(/\\/g, '/');
-    const segments = normalizedPath.split('/');
+  filePaths.forEach((filePath) => {
+    // Normalize slashes to forward slashes for cross-platform support
+    const normalizedPath = filePath.replace(/\\/g, '/');
+    const parts = normalizedPath.split('/');
     
-    // Expecting at least: category/filename.ext
-    if (segments.length < 2) return;
+    // Locate the "photos" root directory segment
+    const photosIndex = parts.indexOf('photos');
+    
+    // Ensure the path has the expected depth: photos/CategoryName/Filename
+    if (photosIndex === -1 || parts.length < photosIndex + 3) return;
 
-    const category = segments[segments.length - 2];
-    const filename = segments[segments.length - 1];
+    const category = parts[photosIndex + 1];
+    const filename = parts[parts.length - 1];
 
-    // Regex Explanation:
-    // ^(.+?)           - Captures the fish name (lazy match)
-    // \s*\(            - Optional whitespace followed by an opening parenthesis
-    // (\d+)            - Captures the index number (1 for primary, 2 for secondary)
-    // \)\.[^.]+$/      - Closing parenthesis, dot, and extension
-    const match = filename.match(/^(.+?)\s*\((\d+)\)\.[^.]+$/);
-
+    // Regex to extract Fish Name and the Image Number
+    // Matches patterns like: "Tiger Prawns (1).jpg" or "Tuna Steak (2).png"
+    // Captures group 1: FishName, group 2: Number
+    const match = filename.match(/^(.+?)\s*\((\d+)\)\.[a-zA-Z0-9]+$/);
+    
     if (match) {
       const fishName = match[1].trim();
-      const index = parseInt(match[2], 10);
+      const imageNumber = parseInt(match[2], 10);
 
-      if (!registry[category]) {
-        registry[category] = {};
+      // Initialize category mapping if it doesn't exist
+      if (!data[category]) {
+        data[category] = {};
       }
-
-      if (!registry[category][fishName]) {
-        registry[category][fishName] = {
-          name: fishName,
-          category: category,
-          primary: null,
-          secondary: null,
-          images: []
-        };
-      }
-
-      const fishEntry = registry[category][fishName];
       
-      // Store full path for image reference
-      fishEntry.images.push(normalizedPath);
-
-      if (index === 1) {
-        fishEntry.primary = normalizedPath;
-      } else if (index === 2) {
-        fishEntry.secondary = normalizedPath;
+      // Initialize array for images if it doesn't exist for this fish
+      if (!data[category][fishName]) {
+        data[category][fishName] = [];
       }
+
+      // Map (1) to index 0, (2) to index 1, etc., preserving exact array order
+      data[category][fishName][imageNumber - 1] = filePath;
     }
   });
 
-  return registry;
-}
+  // Cleanup: In case an image number was skipped (e.g. only had a "(2).jpg"), 
+  // filter out undefined/null slots in the arrays to avoid breakage when rendering.
+  for (const category in data) {
+    for (const fishName in data[category]) {
+      data[category][fishName] = data[category][fishName].filter(Boolean);
+    }
+  }
 
-/**
- * Helper to convert the registry into a flat array of fish products
- * useful for grid displays.
- */
-export function flattenFishData(registry) {
-  const result = [];
-  Object.values(registry).forEach(categoryFish => {
-    Object.values(categoryFish).forEach(fish => {
-      result.push(fish);
-    });
-  });
-  return result;
+  return data;
 }

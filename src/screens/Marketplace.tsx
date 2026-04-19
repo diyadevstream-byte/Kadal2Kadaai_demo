@@ -1,42 +1,46 @@
 import React, { useState, useMemo } from 'react';
 import CategorySidebar from '../components/CategorySidebar';
 import ProductCard from '../components/ProductCard';
-import ProductModal from '../components/ProductModal';
-import fishData from '../data/fishData.json';
+import fishData from '../data/seafoodProducts.json';
+import { motion } from 'motion/react';
+
+// Dynamically built from whatever folders exist in public/Photos
+const CATEGORIES = Object.keys(fishData as any).map(key => ({ id: key, name: key }));
 
 export default function Marketplace() {
-  const [activeCategory, setActiveCategory] = useState('Marine fish');
+  const [activeCategory, setActiveCategory] = useState(CATEGORIES[0].id);
+  const [pricingMode, setPricingMode] = useState<'Retail' | 'Wholesale'>('Retail');
 
   const products = useMemo(() => {
-    const categoryData = (fishData as any)[activeCategory];
+    // Cast fishData to any to handle indexing dynamically
+    const categoryData: any[] = (fishData as any)[activeCategory];
     if (!categoryData) return [];
-    return Object.values(categoryData);
+    
+    // Inject category into each product for the card display
+    return categoryData.map(product => ({
+      ...product,
+      category: activeCategory
+    }));
   }, [activeCategory]);
 
   return (
-    <div className="flex flex-col lg:flex-row h-screen bg-background overflow-hidden">
+    <div className="flex flex-col lg:flex-row bg-background relative">
       {/* Desktop Sidebar / Mobile Category Bar */}
-      <div className="hidden lg:block">
+      <div className="hidden lg:block sticky top-20 overflow-y-auto h-[calc(100vh-80px)] w-80 border-r border-outline-variant/10 shrink-0 custom-scrollbar">
         <CategorySidebar 
           activeCategory={activeCategory} 
           onSelectCategory={setActiveCategory} 
+          categories={CATEGORIES} // Ensure CategorySidebar accepts this, or modify CategorySidebar
         />
       </div>
 
       {/* Mobile Horizontal Category Scroller */}
-      <div className="lg:hidden w-full bg-surface-container-low border-b border-outline-variant/10 py-4 px-4 overflow-x-auto flex gap-3 no-scrollbar shrink-0">
-        {[
-          { id: 'Marine fish', name: 'Marine' },
-          { id: 'freshwater fish', name: 'Freshwater' },
-          { id: 'Freashwater Prawn', name: 'Prawns' },
-          { id: 'Crabs', name: 'Crabs' },
-          { id: 'Dry Seafood', name: 'Dry' },
-          { id: 'Squid  Cuttlefish  Octopus', name: 'Exotics' }
-        ].map(cat => (
+      <div className="lg:hidden w-full bg-surface-container-low border-b border-outline-variant/10 py-4 px-4 overflow-x-auto flex gap-3 hide-scrollbar shrink-0">
+        {CATEGORIES.map(cat => (
           <button
             key={cat.id}
             onClick={() => setActiveCategory(cat.id)}
-            className={`whitespace-nowrap px-6 py-2 rounded-full font-headline text-xs font-bold uppercase tracking-widest transition-all ${activeCategory === cat.id ? 'bg-primary text-black' : 'bg-surface-container text-on-surface-variant'}`}
+            className={`whitespace-nowrap px-6 py-4 min-h-[48px] rounded-full font-headline text-xs font-bold uppercase tracking-widest transition-all ${activeCategory === cat.id ? 'bg-primary text-white shadow-lg' : 'bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high font-bold'}`}
           >
             {cat.name}
           </button>
@@ -44,12 +48,34 @@ export default function Marketplace() {
       </div>
 
       {/* Content Area */}
-      <main className="flex-1 overflow-y-auto p-4 md:p-8 lg:p-12 relative">
-        <div className="max-w-7xl mx-auto">
-          <header className="mb-8 lg:mb-12">
-            <h1 className="font-headline text-3xl lg:text-5xl font-black text-white tracking-tight">
-              {activeCategory}
-            </h1>
+      <main className="flex-1 px-4 md:px-8 lg:px-10 py-8 lg:py-12 relative">
+        <div className="max-w-[1280px] mx-auto">
+          <header className="mb-8 lg:mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6 pb-6 border-b border-outline-variant/10">
+            <div className="flex flex-col gap-2">
+               <h1 className="font-headline text-3xl lg:text-5xl font-black text-on-surface tracking-tight uppercase">
+                 {activeCategory.replace('secondary', 'Secondary')}
+               </h1>
+               <p className="text-sm text-on-surface-variant font-medium">Sustainably sourced directly from local deep sea trawlers.</p>
+            </div>
+
+             {/* Global Pricing Toggle */}
+            <div className="flex flex-col items-end gap-2 shrink-0">
+               <span className="text-[10px] uppercase font-bold tracking-[0.2em] text-on-surface-variant/60">Market Selection</span>
+               <div className="flex items-center bg-surface-container-low rounded-full p-2 border border-outline-variant/10 shadow-sm">
+                  <button 
+                    onClick={() => setPricingMode('Retail')} 
+                    className={`px-6 py-3 min-h-[48px] rounded-full text-xs font-bold uppercase tracking-widest transition-all ${pricingMode === 'Retail' ? 'bg-primary text-white shadow-lg' : 'text-on-surface-variant hover:text-on-surface font-bold'}`}
+                  >
+                    Retail (1kg)
+                  </button>
+                  <button 
+                    onClick={() => setPricingMode('Wholesale')} 
+                    className={`px-6 py-3 min-h-[48px] rounded-full text-xs font-bold uppercase tracking-widest transition-all flex items-center gap-1.5 ${pricingMode === 'Wholesale' ? 'bg-[#D84315] text-white shadow-lg' : 'text-on-surface-variant hover:text-on-surface font-bold'}`}
+                  >
+                    Wholesale (B2B)
+                  </button>
+               </div>
+            </div>
           </header>
 
           {/* Product Grid / Empty State */}
@@ -57,8 +83,9 @@ export default function Marketplace() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
               {products.map((fish: any) => (
                 <ProductCard 
-                  key={fish.name} 
+                  key={fish.id || fish.name} 
                   fish={fish} 
+                  pricingMode={pricingMode}
                 />
               ))}
             </div>
@@ -96,7 +123,7 @@ export default function Marketplace() {
                  </div>
               </div>
 
-              <h2 className="font-headline text-4xl font-black text-white mb-4 tracking-tighter">
+              <h2 className="font-headline text-4xl font-black text-on-surface mb-4 tracking-tighter uppercase">
                  The Depth is <span className="text-primary italic">Silent.</span>
               </h2>
               <p className="font-body text-on-surface-variant text-center max-w-sm leading-relaxed">
@@ -104,7 +131,7 @@ export default function Marketplace() {
               </p>
               
               <button 
-                onClick={() => setActiveCategory('Marine fish')}
+                onClick={() => setActiveCategory(CATEGORIES[0]?.id)}
                 className="mt-10 px-8 py-3 rounded-full border border-primary/30 text-primary font-label text-xs uppercase tracking-[0.2em] hover:bg-primary hover:text-black transition-all"
               >
                 Back to Deep Sea

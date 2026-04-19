@@ -1,61 +1,54 @@
 import React, { useState } from 'react';
+import { motion } from 'motion/react';
 
 export default function ImageGallery({ fish }: { fish: any }) {
   const [activeImage, setActiveImage] = useState<'primary' | 'secondary'>('primary');
-  const [zoomPos, setZoomPos] = useState({ x: 0, y: 0 });
-  const [isZooming, setIsZooming] = useState(false);
 
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const { left, top, width, height } = e.currentTarget.getBoundingClientRect();
-    const x = ((e.clientX - left) / width) * 100;
-    const y = ((e.clientY - top) / height) * 100;
-    setZoomPos({ x, y });
-  };
+  const src = activeImage === 'primary' ? (fish.primary || fish.image1) : (fish.secondary || fish.image2);
 
   return (
-    <>
-      <div className="md:col-span-1 hidden lg:flex flex-col gap-4 sticky top-24">
-        <button 
-          onClick={() => setActiveImage('primary')}
-          className={`w-16 h-16 rounded-xl overflow-hidden border-2 transition-all ${activeImage === 'primary' ? 'border-primary' : 'border-transparent opacity-40'}`}
-        >
-          <img src={fish.primary} className="w-full h-full object-cover" alt="Primary" loading="lazy" />
-        </button>
-        {fish.secondary && (
-           <button 
-             onClick={() => setActiveImage('secondary')}
-             className={`w-16 h-16 rounded-xl overflow-hidden border-2 transition-all ${activeImage === 'secondary' ? 'border-primary' : 'border-transparent opacity-40'}`}
-           >
-             <img src={fish.secondary} className="w-full h-full object-cover" alt="Secondary" loading="lazy" />
-           </button>
-        )}
+    <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start min-h-[400px] w-full">
+      {/* Thumbnail strip - desktop only */}
+      <div className="hidden lg:flex lg:col-span-2 flex-col gap-4 sticky top-24">
+        {[
+          { type: 'primary', img: fish.primary || fish.image1 || 'https://placehold.co/200x200/03070c/00daf3?text=Main' },
+          { type: 'secondary', img: fish.secondary || fish.image2 }
+        ].filter(t => t.img).map((item) => (
+          <button
+            key={item.type}
+            onClick={() => setActiveImage(item.type as 'primary' | 'secondary')}
+            className={`w-full aspect-square rounded-3xl overflow-hidden border-2 transition-all bg-surface-container-low/50 ${activeImage === item.type ? 'border-primary shadow-[0_0_20px_rgba(0,218,243,0.4)]' : 'border-transparent opacity-50 hover:opacity-100 hover:border-white/10'}`}
+          >
+            <img src={item.img} className="w-full h-full object-cover" alt={item.type} loading="lazy" />
+          </button>
+        ))}
       </div>
 
-      <div 
-        className="md:col-span-12 lg:col-span-5 relative group bg-surface-container-low rounded-[3rem] overflow-hidden aspect-square border border-outline-variant/10 cursor-crosshair"
-        onMouseMove={handleMouseMove}
-        onMouseEnter={() => setIsZooming(true)}
-        onMouseLeave={() => setIsZooming(false)}
-      >
-        <div className="absolute top-6 left-6 z-10">
-          <div className="px-4 py-2 bg-background/80 backdrop-blur-xl border border-white/10 rounded-full flex items-center gap-2 shadow-lg">
-            <div className="w-2 h-2 rounded-full bg-primary animate-pulse shadow-[0_0_8px_rgba(0,218,243,0.8)]"></div>
-            <span className="font-label text-[10px] uppercase tracking-widest text-primary font-bold">
-              Fresh Catch
-            </span>
+      {/* Main image container */}
+      <div className="md:col-span-12 lg:col-span-10 relative bg-surface-container-low/10 rounded-[4rem] overflow-hidden border border-white/5 flex items-center justify-center p-4 group shadow-2xl" style={{ aspectRatio: '16/10' }}>
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/15 via-transparent to-primary/10 opacity-40" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-primary/10 rounded-full blur-[160px] pointer-events-none" />
+
+        <div className="absolute top-8 left-8 z-20">
+          <div className="px-5 py-2.5 bg-black/40 backdrop-blur-2xl border border-white/10 rounded-full flex items-center gap-3 shadow-2xl">
+            <div className="w-2.5 h-2.5 rounded-full bg-primary animate-pulse shadow-[0_0_12px_#00daf3]" />
+            <span className="font-label text-xs uppercase tracking-[0.2em] text-primary font-black">Verified Fresh</span>
           </div>
         </div>
 
-        <img 
-          src={activeImage === 'primary' ? fish.primary : fish.secondary} 
-          className={`w-full h-full object-contain transition-transform duration-200 ${isZooming ? 'scale-[2.5]' : 'scale-100'}`}
-          style={{
-            transformOrigin: isZooming ? `${zoomPos.x}% ${zoomPos.y}%` : 'center'
-          }}
+        <motion.img
+          key={src || 'fallback'}
+          src={src || 'https://placehold.co/1200x800/03070c/00daf3?text=Product+Image'}
+          initial={{ opacity: 0, scale: 0.98 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.8 }}
+          className="relative z-10 w-full h-full object-contain p-4 drop-shadow-[0_50px_100px_rgba(0,0,0,0.95)] group-hover:scale-[1.05] transition-transform duration-1000"
           alt={fish.name}
-          loading="lazy"
+          onError={(e) => {
+            e.currentTarget.src = 'https://placehold.co/1200x800/03070c/00daf3?text=Image+Load+Failed';
+          }}
         />
       </div>
-    </>
+    </div>
   );
 }
