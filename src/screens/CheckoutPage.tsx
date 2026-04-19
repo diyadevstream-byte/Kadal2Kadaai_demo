@@ -7,56 +7,56 @@ import SeaLifeCanvas from '../components/SeaLifeCanvas';
 import SignatureDishCard from '../components/SignatureDishCard';
 import { motion, AnimatePresence } from 'motion/react';
 
-// Meta-data helper for fish categories
+// Meta-data helper for fish categories - Aligned with user's specific request
 const FISH_METADATA: Record<string, { benefits: string[], tips: string, hacks: string, freshness: string, badges: string[] }> = {
   "Marine fish": {
     benefits: ["Rich in Omega-3", "Heart Healthy", "Premium Protein"],
     tips: "Tastes best when pan-seared with butter & herbs.",
     hacks: "Add a splash of lemon juice while cooking to keep the meat firm.",
     freshness: "Deep-sea catch, boat-to-dock in 6 hours.",
-    badges: ["Omega-3 Rich", "Zero Antibiotics", "Wild Caught"]
+    badges: ["NUTRIENT DENSE", "CERTIFIED FRESH", "GRADE A"]
   },
   "freshwater fish": {
     benefits: ["High Lean Protein", "Easy to Digest", "Low Calorie"],
     tips: "Perfect for traditional spicy curries or deep frying.",
     hacks: "Marinate with turmeric and salt for 15 mins to reduce moisture.",
     freshness: "Farm-harvested daily. Flash-chilled immediately.",
-    badges: ["Lean Protein", "Pure Sourced", "Daily Harvest"]
+    badges: ["NUTRIENT DENSE", "CERTIFIED FRESH", "GRADE A"]
   },
   "Brackish Water Fish": {
     benefits: ["Naturally Sweet Meat", "Potassium-Rich", "Zero Antibiotics"],
     tips: "Excellent for grilling or steaming with ginger.",
     hacks: "Score the skin slightly to let spices penetrate deeper.",
     freshness: "Sourced from pristine local backwaters.",
-    badges: ["Mineral Rich", "Sustainably Sourced", "Chef's Choice"]
+    badges: ["NUTRIENT DENSE", "CERTIFIED FRESH", "GRADE A"]
   },
   "Crabs": {
     benefits: ["B-12 Powerhouse", "Zinc & Selenium", "Very Low Fat"],
     tips: "Steam for 10-12 mins to retain natural sweetness.",
     hacks: "Freeze for 10 mins before cleaning to lock in flavor.",
     freshness: "Live caught, packed in chilled humidity.",
-    badges: ["B-12 Boost", "Low Mercury", "Live Inspected"]
+    badges: ["NUTRIENT DENSE", "CERTIFIED FRESH", "GRADE A"]
   },
   "Freashwater Prawn": {
     benefits: ["Phosphorus-rich", "Muscle Recovery", "Heart Friendly"],
     tips: "Avoid overcooking; sauté for just 3-4 mins.",
     hacks: "Cook with shells on for a deeper, nuttier flavor profile.",
     freshness: "Harvested at dawn, delivered by noon.",
-    badges: ["High Zinc", "Purity Tested", "A+ Grade"]
+    badges: ["NUTRIENT DENSE", "CERTIFIED FRESH", "GRADE A"]
   },
   "Shellfish": {
     benefits: ["Iron Booster", "Healthy Magnesium", "Amino Acids"],
     tips: "Scrub well and steam until shells open wide.",
     hacks: "Discard any shells that don't open after cooking.",
     freshness: "Morning inspection for peak purity labels.",
-    badges: ["Iron Rich", "Inspected", "Ocean Prime"]
+    badges: ["NUTRIENT DENSE", "CERTIFIED FRESH", "GRADE A"]
   },
   "default": {
     benefits: ["Premium Protein", "Omega-3 Rich", "Daily Nutrition"],
     tips: "Keep refrigerated and consume within 24 hours.",
-    hacks: "Store in the coldest part of your fridge (0-2°C).",
+    hacks: "STORE IN THE COLDEST PART OF YOUR FRIDGE (0-2°C).",
     freshness: "Sourced directly from certified coastal hubs.",
-    badges: ["Nutrient Dense", "Certified Fresh", "Grade A"]
+    badges: ["NUTRIENT DENSE", "CERTIFIED FRESH", "GRADE A"]
   }
 };
 
@@ -289,12 +289,12 @@ export default function CheckoutPage() {
                                 </div>
                              </div>
 
-                             {/* Freshness Progress Bar */}
+                             {/* Freshness Progress Bar - Labels Aligned with user prompt */}
                              <div className="flex flex-col gap-3 px-2">
                                 <div className="flex justify-between items-center text-[9px] font-black uppercase tracking-[0.2em]">
-                                   <span className="text-on-surface-variant/30">Harvest</span>
-                                   <span className="text-primary">Inspected</span>
-                                   <span className="text-on-surface-variant/30">Your Dock</span>
+                                   <span className="text-on-surface-variant/30">HARVEST</span>
+                                   <span className="text-primary">INSPECTED</span>
+                                   <span className="text-on-surface-variant/30">YOUR DOCK</span>
                                 </div>
                                 <div className="h-1 bg-surface-container-high rounded-full flex items-center">
                                    <div className="h-full w-2/3 bg-primary rounded-full relative shadow-[0_0_15px_rgba(230,81,0,0.5)]">
@@ -306,7 +306,7 @@ export default function CheckoutPage() {
                              <div className="p-5 bg-surface-container rounded-2xl flex gap-4 border border-outline-variant/5 items-start">
                                 <div className="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center shrink-0"><ShieldPlus className="w-5 h-5 text-primary" /></div>
                                 <div className="flex flex-col gap-1">
-                                   <span className="text-[10px] font-black uppercase text-on-surface leading-none mb-1">Health Optimization</span>
+                                   <span className="text-[10px] font-black uppercase text-on-surface leading-none mb-1">HEALTH OPTIMIZATION</span>
                                    <p className="text-[9px] font-bold text-on-surface-variant leading-relaxed uppercase">{facts.hacks}</p>
                                 </div>
                              </div>
@@ -318,7 +318,7 @@ export default function CheckoutPage() {
                                    <button onClick={() => updateQuantity(item.id, item.cutType, item.weight, item.quantity + 1)} className="w-8 h-8 rounded-xl bg-surface-container-lowest flex items-center justify-center text-on-surface hover:bg-primary hover:text-white transition-colors"><Plus className="w-4 h-4" /></button>
                                 </div>
                                 <div className="flex flex-col items-end">
-                                   <span className="text-[10px] font-black text-on-surface-variant/20 uppercase tracking-[0.2em] mb-1">Total Unit Val</span>
+                                   <span className="text-[10px] font-black text-on-surface-variant/20 uppercase tracking-[0.2em] mb-1">TOTAL UNIT VAL</span>
                                    <span className="text-2xl font-black text-on-surface leading-none tracking-tighter">{formatPrice(item.price * item.quantity)}</span>
                                 </div>
                              </div>
@@ -330,20 +330,20 @@ export default function CheckoutPage() {
 
                 <div className="flex flex-col gap-5 px-4 pt-10 border-t border-outline-variant/10 relative">
                    <div className="flex justify-between items-center text-xs font-black uppercase tracking-widest text-on-surface-variant/40">
-                      <span>Total Net Capture</span>
+                      <span>TOTAL NET CAPTURE</span>
                       <span className="text-on-surface">{formatPrice(cartTotal)}</span>
                    </div>
                    <div className="flex justify-between items-center text-xs font-black uppercase tracking-widest text-primary">
-                      <span>Cold Chain Logistics</span>
+                      <span>COLD CHAIN LOGISTICS</span>
                       <span>{formatPrice(deliveryFee)}</span>
                    </div>
                    <div className="flex justify-between items-center text-xs font-black uppercase tracking-widest text-on-surface-variant/40">
-                      <span>Capture Tax (GST 5%)</span>
+                      <span>CAPTURE TAX (GST 5%)</span>
                       <span className="text-on-surface">{formatPrice(taxAmount)}</span>
                    </div>
                    <div className="mt-8 pt-8 border-t-4 border-on-surface border-double">
                       <div className="flex justify-between items-end">
-                         <span className="font-headline text-2xl font-black text-on-surface uppercase tracking-tighter leading-none mb-2">Grand Total</span>
+                         <span className="font-headline text-2xl font-black text-on-surface uppercase tracking-tighter leading-none mb-2">GRAND TOTAL</span>
                          <div className="flex flex-col items-end">
                             <span className="text-7xl font-black text-primary tracking-tighter leading-[0.85]">{formatPrice(finalTotal)}</span>
                          </div>
