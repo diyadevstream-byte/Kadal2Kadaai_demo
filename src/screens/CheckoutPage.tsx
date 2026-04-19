@@ -97,14 +97,14 @@ export default function CheckoutPage() {
 
   if (cart.length === 0 && !isOrdered) {
     return (
-      <div className="min-h-screen bg-[#FAF7F2] flex flex-col items-center justify-center p-6 text-center relative overflow-hidden">
+      <div className="min-h-screen bg-background flex flex-col items-center justify-center p-6 text-center relative overflow-hidden">
         <SeaLifeCanvas />
         <motion.div 
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           className="flex flex-col items-center gap-10 max-w-xl z-10"
         >
-          <div className="w-48 h-48 rounded-[4rem] bg-white flex items-center justify-center relative shadow-[0_40px_80px_-15px_rgba(230,81,0,0.15)] border border-primary/5">
+          <div className="w-48 h-48 rounded-[4rem] bg-surface-container-lowest flex items-center justify-center relative shadow-2xl border border-primary/5">
              <ShoppingBag className="w-20 h-20 text-primary opacity-20" />
              <div className="absolute inset-0 flex items-center justify-center">
                  <motion.div 
@@ -119,14 +119,14 @@ export default function CheckoutPage() {
              </div>
           </div>
           <div className="flex flex-col gap-4">
-            <h1 className="font-headline text-6xl font-black text-[#2D2321] uppercase tracking-tighter leading-none">Your Net is empty</h1>
-            <p className="text-[#5D4037] font-bold text-xl leading-relaxed px-12 opacity-80">
+            <h1 className="font-headline text-6xl font-black text-on-surface uppercase tracking-tighter leading-none">Your Net is empty</h1>
+            <p className="text-on-surface-variant font-bold text-xl leading-relaxed px-12 opacity-80">
               The daily catch is arriving at the docks! Don't miss out on the freshest seafood selected just for you.
             </p>
           </div>
           <div className="flex flex-col sm:flex-row gap-4">
             <Link to="/marketplace">
-              <OceanButton className="px-12 h-20 rounded-[2rem] bg-[#2D2321] text-white font-black uppercase tracking-widest text-sm shadow-2xl">
+              <OceanButton className="px-12 h-20 rounded-[2rem] bg-on-surface text-surface font-black uppercase tracking-widest text-sm shadow-2xl">
                 See Today's Arrivals
               </OceanButton>
             </Link>
@@ -138,19 +138,19 @@ export default function CheckoutPage() {
 
   if (isOrdered) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-[#FAF7F2] relative overflow-hidden">
+      <div className="min-h-screen flex flex-col items-center justify-center bg-background relative overflow-hidden">
         <SeaLifeCanvas />
-        <motion.div initial={{ y: 50, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="flex flex-col items-center gap-10 text-center z-10 p-12 bg-white/60 backdrop-blur-xl rounded-[5rem] border border-white shadow-2xl shadow-primary/10">
+        <motion.div initial={{ y: 50, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="flex flex-col items-center gap-10 text-center z-10 p-12 bg-surface-container-lowest/60 backdrop-blur-xl rounded-[5rem] border border-outline-variant/10 shadow-2xl shadow-primary/10">
           <div className="w-40 h-40 rounded-[3rem] bg-primary/20 flex items-center justify-center text-primary shadow-xl">
             <CheckCircle2 className="w-20 h-20" />
           </div>
           <div className="flex flex-col gap-4 px-6">
-            <h1 className="font-headline text-5xl font-black text-[#2D2321] uppercase tracking-tighter">Harvest Secured!</h1>
-            <p className="text-[#5D4037] font-bold text-xl max-w-sm mx-auto opacity-80">
+            <h1 className="font-headline text-5xl font-black text-on-surface uppercase tracking-tighter">Harvest Secured!</h1>
+            <p className="text-on-surface-variant font-bold text-xl max-w-sm mx-auto opacity-80">
               {formData.fullName}, your fresh catch is being prioritized for the next cold-chain dispatch.
             </p>
           </div>
-          <div className="w-64 h-2 bg-[#F3EFE6] rounded-full overflow-hidden">
+          <div className="w-64 h-2 bg-surface-container rounded-full overflow-hidden">
              <motion.div initial={{ x: "-100%" }} animate={{ x: "0%" }} transition={{ duration: 3 }} className="w-full h-full bg-primary" />
           </div>
           <p className="text-[10px] font-black uppercase tracking-[0.5em] text-primary animate-pulse">Navigating to Home</p>
@@ -160,16 +160,16 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="bg-[#FAF7F2] min-h-screen relative overflow-hidden">
+    <div className="bg-background min-h-screen relative overflow-hidden">
       <SeaLifeCanvas />
       
       <div className="max-w-[1440px] mx-auto px-6 lg:px-12 py-12 lg:py-24 flex flex-col gap-12 relative z-10">
         
         <div className="flex flex-col gap-4">
-          <Link to="/marketplace" className="flex items-center gap-2 text-[#5D4037] hover:text-primary transition-colors font-black text-[10px] uppercase tracking-[0.4em]">
+          <Link to="/marketplace" className="flex items-center gap-2 text-on-surface-variant hover:text-primary transition-colors font-black text-[10px] uppercase tracking-[0.4em]">
             <ArrowLeft className="w-4 h-4" /> Go Back to Catch
           </Link>
-          <h1 className="font-headline text-7xl font-black text-[#2D2321] tracking-tighter uppercase leading-[0.85] py-4">Checkout</h1>
+          <h1 className="font-headline text-7xl font-black text-on-surface tracking-tighter uppercase leading-[0.85] py-4">Checkout</h1>
         </div>
 
         {/* Signature Selection */}
@@ -182,50 +182,50 @@ export default function CheckoutPage() {
           {/* Main Controls */}
           <div className="flex flex-col gap-10">
             
-            <section className="bg-white rounded-[4rem] p-10 lg:p-14 border border-outline-variant/10 shadow-[0_8px_32px_rgba(45,35,33,0.05)] flex flex-col gap-12">
+            <section className="bg-surface-container-lowest rounded-[4rem] p-10 lg:p-14 border border-outline-variant/10 shadow-[0_8px_32px_rgba(0,0,0,0.05)] flex flex-col gap-12">
                <div className="flex items-center gap-6">
-                  <div className="w-16 h-16 rounded-[2rem] bg-[#F3EFE6] flex items-center justify-center font-headline font-black text-3xl text-primary border border-primary/5">1</div>
+                  <div className="w-16 h-16 rounded-[2rem] bg-surface-container flex items-center justify-center font-headline font-black text-3xl text-primary border border-primary/5">1</div>
                   <div className="flex flex-col">
-                     <h2 className="font-headline text-4xl font-black text-[#2D2321] tracking-tight uppercase leading-none mb-2">Billing Dock</h2>
-                     <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[#5D4037] opacity-40">Verified Coastal Transaction Support</p>
+                     <h2 className="font-headline text-4xl font-black text-on-surface tracking-tight uppercase leading-none mb-2">Billing Dock</h2>
+                     <p className="text-[10px] font-black uppercase tracking-[0.2em] text-on-surface-variant opacity-40">Verified Coastal Transaction Support</p>
                   </div>
                </div>
 
                <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
                   <div className="flex flex-col gap-4">
-                     <label className="font-label text-xs uppercase tracking-[0.3em] text-[#5D4037] font-black">Captain's Name</label>
+                     <label className="font-label text-xs uppercase tracking-[0.3em] text-on-surface-variant font-black">Captain's Name</label>
                      <input 
                       value={formData.fullName}
                       onChange={(e) => setFormData(p => ({ ...p, fullName: e.target.value }))}
-                      className="w-full h-18 bg-[#FAF7F2] rounded-3xl px-8 border-2 border-transparent focus:border-primary/20 focus:bg-white transition-all font-body text-base text-[#2D2321] font-black outline-none shadow-sm" 
+                      className="w-full h-18 bg-surface-container rounded-3xl px-8 border-2 border-transparent focus:border-primary/20 focus:bg-surface-container-lowest transition-all font-body text-base text-on-surface font-black outline-none shadow-sm" 
                       placeholder="Enter Full Name" 
                      />
                   </div>
                   <div className="flex flex-col gap-4">
-                     <label className="font-label text-xs uppercase tracking-[0.3em] text-[#5D4037] font-black">Satellite Phone</label>
+                     <label className="font-label text-xs uppercase tracking-[0.3em] text-on-surface-variant font-black">Satellite Phone</label>
                      <input 
                       value={formData.phone}
                       onChange={(e) => setFormData(p => ({ ...p, phone: e.target.value }))}
-                      className="w-full h-18 bg-[#FAF7F2] rounded-3xl px-8 border-2 border-transparent focus:border-primary/20 focus:bg-white transition-all font-body text-base text-[#2D2321] font-black outline-none shadow-sm" 
+                      className="w-full h-18 bg-surface-container rounded-3xl px-8 border-2 border-transparent focus:border-primary/20 focus:bg-surface-container-lowest transition-all font-body text-base text-on-surface font-black outline-none shadow-sm" 
                       placeholder="+91" 
                      />
                   </div>
                   <div className="md:col-span-2 flex flex-col gap-4">
-                     <label className="font-label text-xs uppercase tracking-[0.3em] text-[#5D4037] font-black">Exact Docking Location</label>
+                     <label className="font-label text-xs uppercase tracking-[0.3em] text-on-surface-variant font-black">Exact Docking Location</label>
                      <textarea 
                       value={formData.address}
                       onChange={(e) => setFormData(p => ({ ...p, address: e.target.value }))}
-                      className="w-full h-36 bg-[#FAF7F2] rounded-[2.5rem] px-8 py-6 border-2 border-transparent focus:border-primary/20 focus:bg-white transition-all font-body text-base text-[#2D2321] font-black outline-none resize-none shadow-sm" 
+                      className="w-full h-36 bg-surface-container rounded-[2.5rem] px-8 py-6 border-2 border-transparent focus:border-primary/20 focus:bg-surface-container-lowest transition-all font-body text-base text-on-surface font-black outline-none resize-none shadow-sm" 
                       placeholder="House No, Street, Landmark..." 
                      />
                   </div>
                </div>
             </section>
 
-            <section className="bg-white rounded-[4rem] p-10 lg:p-14 border border-outline-variant/10 shadow-[0_8px_32px_rgba(45,35,33,0.05)] flex flex-col gap-12">
+            <section className="bg-surface-container-lowest rounded-[4rem] p-10 lg:p-14 border border-outline-variant/10 shadow-[0_8px_32px_rgba(0,0,0,0.05)] flex flex-col gap-12">
                <div className="flex items-center gap-6">
-                  <div className="w-16 h-16 rounded-[2rem] bg-[#F3EFE6] flex items-center justify-center font-headline font-black text-3xl text-primary border border-primary/5">2</div>
-                  <h2 className="font-headline text-4xl font-black text-[#2D2321] tracking-tight uppercase leading-none">Express Logistics</h2>
+                  <div className="w-16 h-16 rounded-[2rem] bg-surface-container flex items-center justify-center font-headline font-black text-3xl text-primary border border-primary/5">2</div>
+                  <h2 className="font-headline text-4xl font-black text-on-surface tracking-tight uppercase leading-none">Express Logistics</h2>
                </div>
                <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
                  {[
@@ -236,12 +236,12 @@ export default function CheckoutPage() {
                     <button 
                       key={s.id} 
                       onClick={() => setDeliverySlot(s.id)}
-                      className={`flex flex-col gap-3 p-8 rounded-[2.5rem] transition-all text-left border-4 relative overflow-hidden group ${deliverySlot === s.id ? 'bg-[#2D2321] border-[#2D2321] shadow-2xl scale-[1.05]' : 'bg-[#FAF7F2] border-transparent hover:border-primary/20'}`}
+                      className={`flex flex-col gap-3 p-8 rounded-[2.5rem] transition-all text-left border-4 relative overflow-hidden group ${deliverySlot === s.id ? 'bg-on-surface border-on-surface shadow-2xl scale-[1.05]' : 'bg-surface-container border-transparent hover:border-primary/20'}`}
                     >
-                       <span className={`font-headline font-black uppercase tracking-widest text-xs ${deliverySlot === s.id ? 'text-white' : 'text-[#2D2321]'}`}>{s.label}</span>
+                       <span className={`font-headline font-black uppercase tracking-widest text-xs ${deliverySlot === s.id ? 'text-surface' : 'text-on-surface'}`}>{s.label}</span>
                        <div className="flex flex-col">
-                          <span className={`text-[10px] font-black uppercase tracking-[0.2em] ${deliverySlot === s.id ? 'text-primary' : 'text-[#5D4037]'}`}>{s.time}</span>
-                          <span className={`text-[9px] font-bold ${deliverySlot === s.id ? 'text-white/40' : 'text-[#5D4037] opacity-40'}`}>{s.desc}</span>
+                          <span className={`text-[10px] font-black uppercase tracking-[0.2em] ${deliverySlot === s.id ? 'text-primary' : 'text-on-surface-variant'}`}>{s.time}</span>
+                          <span className={`text-[9px] font-bold ${deliverySlot === s.id ? 'text-surface/40' : 'text-on-surface-variant opacity-40'}`}>{s.desc}</span>
                        </div>
                        {deliverySlot === s.id && <div className="absolute -bottom-4 -right-4 w-12 h-12 bg-primary/20 rounded-full blur-xl" />}
                     </button>
@@ -252,13 +252,13 @@ export default function CheckoutPage() {
 
           {/* Sidebar Summary */}
           <div className="flex flex-col gap-10 lg:sticky lg:top-32">
-             <div className="bg-[#2D2321] rounded-[4.5rem] p-10 lg:p-14 shadow-[0_48px_96px_-12px_rgba(0,0,0,0.3)] flex flex-col gap-12 relative overflow-hidden">
+             <div className="bg-surface-container-highest rounded-[4.5rem] p-10 lg:p-14 shadow-2xl flex flex-col gap-12 relative overflow-hidden">
                 {/* Decorative Elements */}
-                <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full -translate-y-32 translate-x-32 blur-3xl" />
+                <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full -translate-y-32 translate-x-32 blur-3xl shadow-primary/20" />
                 
-                <h2 className="font-headline text-4xl font-black text-white px-2 uppercase tracking-tighter leading-none">The Chef's Net</h2>
+                <h2 className="font-headline text-4xl font-black text-on-surface px-2 uppercase tracking-tighter leading-none">The Chef's Net</h2>
                 
-                <div className="flex flex-col gap-8 overflow-y-auto max-h-[700px] pr-4 custom-scrollbar-dark px-2">
+                <div className="flex flex-col gap-8 overflow-y-auto max-h-[700px] pr-4 custom-scrollbar px-2">
                   <AnimatePresence mode="popLayout">
                     {cart.map((item) => {
                         const facts = getFishFacts(item.image.split('/')[2]);
@@ -268,20 +268,20 @@ export default function CheckoutPage() {
                             layout
                             initial={{ opacity: 0, scale: 0.9 }}
                             animate={{ opacity: 1, scale: 1 }}
-                            className="flex flex-col gap-6 bg-white/5 p-8 rounded-[3rem] border border-white/10 group backdrop-blur-sm"
+                            className="flex flex-col gap-6 bg-surface p-8 rounded-[3rem] border border-outline-variant/10 group backdrop-blur-sm"
                           >
                              <div className="flex items-center gap-6">
-                                <div className="w-24 h-24 rounded-[2rem] overflow-hidden bg-white shadow-xl border-4 border-white/5 shrink-0">
+                                <div className="w-24 h-24 rounded-[2rem] overflow-hidden bg-white shadow-xl border-4 border-outline-variant/5 shrink-0">
                                    <img src={item.image} className="w-full h-full object-cover group-hover:scale-120 transition-transform duration-1000" />
                                 </div>
                                 <div className="flex-1 flex flex-col gap-2">
                                    <div className="flex items-center justify-between">
-                                      <h4 className="text-lg font-black text-white uppercase tracking-tighter leading-none">{item.name}</h4>
-                                      <button onClick={() => removeFromCart(item.id, item.cutType, item.weight)} className="text-white/20 hover:text-primary transition-colors"><Trash2 className="w-5 h-5" /></button>
+                                      <h4 className="text-lg font-black text-on-surface uppercase tracking-tighter leading-none">{item.name}</h4>
+                                      <button onClick={() => removeFromCart(item.id, item.cutType, item.weight)} className="text-on-surface-variant/20 hover:text-primary transition-colors"><Trash2 className="w-5 h-5" /></button>
                                    </div>
                                    <div className="flex flex-wrap gap-2 pt-1">
                                       {facts.badges.map((badge, idx) => (
-                                         <span key={idx} className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary/20 text-primary font-black text-[8px] uppercase tracking-widest border border-primary/20">
+                                         <span key={idx} className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-primary/10 text-primary font-black text-[8px] uppercase tracking-widest border border-primary/20">
                                             {badge}
                                          </span>
                                       ))}
@@ -292,34 +292,34 @@ export default function CheckoutPage() {
                              {/* Freshness Progress Bar */}
                              <div className="flex flex-col gap-3 px-2">
                                 <div className="flex justify-between items-center text-[9px] font-black uppercase tracking-[0.2em]">
-                                   <span className="text-white/30">Harvest</span>
+                                   <span className="text-on-surface-variant/30">Harvest</span>
                                    <span className="text-primary">Inspected</span>
-                                   <span className="text-white/30">Your Dock</span>
+                                   <span className="text-on-surface-variant/30">Your Dock</span>
                                 </div>
-                                <div className="h-1 bg-white/10 rounded-full flex items-center">
+                                <div className="h-1 bg-surface-container-high rounded-full flex items-center">
                                    <div className="h-full w-2/3 bg-primary rounded-full relative shadow-[0_0_15px_rgba(230,81,0,0.5)]">
-                                      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 bg-white rounded-full border-2 border-primary" />
+                                      <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-2 bg-on-surface rounded-full border-2 border-primary" />
                                    </div>
                                 </div>
                              </div>
 
-                             <div className="p-5 bg-white/5 rounded-2xl flex gap-4 border border-white/5 items-start">
+                             <div className="p-5 bg-surface-container rounded-2xl flex gap-4 border border-outline-variant/5 items-start">
                                 <div className="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center shrink-0"><ShieldPlus className="w-5 h-5 text-primary" /></div>
                                 <div className="flex flex-col gap-1">
-                                   <span className="text-[10px] font-black uppercase text-white leading-none mb-1">Health Optimization</span>
-                                   <p className="text-[9px] font-bold text-white/50 leading-relaxed uppercase">{facts.hacks}</p>
+                                   <span className="text-[10px] font-black uppercase text-on-surface leading-none mb-1">Health Optimization</span>
+                                   <p className="text-[9px] font-bold text-on-surface-variant leading-relaxed uppercase">{facts.hacks}</p>
                                 </div>
                              </div>
 
                              <div className="flex items-center justify-between pt-2">
-                                <div className="flex items-center gap-4 bg-white/5 p-2 rounded-2xl border border-white/5">
-                                   <button onClick={() => updateQuantity(item.id, item.cutType, item.weight, item.quantity - 1)} className="w-8 h-8 rounded-xl bg-white/10 flex items-center justify-center text-white hover:bg-primary transition-colors"><Minus className="w-4 h-4" /></button>
-                                   <span className="text-sm font-black text-white w-4 text-center">{item.quantity}</span>
-                                   <button onClick={() => updateQuantity(item.id, item.cutType, item.weight, item.quantity + 1)} className="w-8 h-8 rounded-xl bg-white/10 flex items-center justify-center text-white hover:bg-primary transition-colors"><Plus className="w-4 h-4" /></button>
+                                <div className="flex items-center gap-4 bg-surface-container p-2 rounded-2xl border border-outline-variant/5">
+                                   <button onClick={() => updateQuantity(item.id, item.cutType, item.weight, item.quantity - 1)} className="w-8 h-8 rounded-xl bg-surface-container-lowest flex items-center justify-center text-on-surface hover:bg-primary hover:text-white transition-colors"><Minus className="w-4 h-4" /></button>
+                                   <span className="text-sm font-black text-on-surface w-4 text-center">{item.quantity}</span>
+                                   <button onClick={() => updateQuantity(item.id, item.cutType, item.weight, item.quantity + 1)} className="w-8 h-8 rounded-xl bg-surface-container-lowest flex items-center justify-center text-on-surface hover:bg-primary hover:text-white transition-colors"><Plus className="w-4 h-4" /></button>
                                 </div>
                                 <div className="flex flex-col items-end">
-                                   <span className="text-[10px] font-black text-white/20 uppercase tracking-[0.2em] mb-1">Total Unit Val</span>
-                                   <span className="text-2xl font-black text-white leading-none tracking-tighter">{formatPrice(item.price * item.quantity)}</span>
+                                   <span className="text-[10px] font-black text-on-surface-variant/20 uppercase tracking-[0.2em] mb-1">Total Unit Val</span>
+                                   <span className="text-2xl font-black text-on-surface leading-none tracking-tighter">{formatPrice(item.price * item.quantity)}</span>
                                 </div>
                              </div>
                           </motion.div>
@@ -328,22 +328,22 @@ export default function CheckoutPage() {
                   </AnimatePresence>
                 </div>
 
-                <div className="flex flex-col gap-5 px-4 pt-10 border-t border-white/10 relative">
-                   <div className="flex justify-between items-center text-xs font-black uppercase tracking-widest text-white/40">
+                <div className="flex flex-col gap-5 px-4 pt-10 border-t border-outline-variant/10 relative">
+                   <div className="flex justify-between items-center text-xs font-black uppercase tracking-widest text-on-surface-variant/40">
                       <span>Total Net Capture</span>
-                      <span className="text-white">{formatPrice(cartTotal)}</span>
+                      <span className="text-on-surface">{formatPrice(cartTotal)}</span>
                    </div>
                    <div className="flex justify-between items-center text-xs font-black uppercase tracking-widest text-primary">
                       <span>Cold Chain Logistics</span>
                       <span>{formatPrice(deliveryFee)}</span>
                    </div>
-                   <div className="flex justify-between items-center text-xs font-black uppercase tracking-widest text-white/40">
+                   <div className="flex justify-between items-center text-xs font-black uppercase tracking-widest text-on-surface-variant/40">
                       <span>Capture Tax (GST 5%)</span>
-                      <span className="text-white">{formatPrice(taxAmount)}</span>
+                      <span className="text-on-surface">{formatPrice(taxAmount)}</span>
                    </div>
-                   <div className="mt-8 pt-8 border-t-4 border-white border-double">
+                   <div className="mt-8 pt-8 border-t-4 border-on-surface border-double">
                       <div className="flex justify-between items-end">
-                         <span className="font-headline text-2xl font-black text-white uppercase tracking-tighter leading-none mb-2">Grand Total</span>
+                         <span className="font-headline text-2xl font-black text-on-surface uppercase tracking-tighter leading-none mb-2">Grand Total</span>
                          <div className="flex flex-col items-end">
                             <span className="text-7xl font-black text-primary tracking-tighter leading-[0.85]">{formatPrice(finalTotal)}</span>
                          </div>
@@ -355,7 +355,7 @@ export default function CheckoutPage() {
                   {error && <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="p-5 bg-error/10 border border-error/20 text-error text-[10px] font-black uppercase tracking-widest text-center rounded-3xl">{error}</motion.div>}
                   <OceanButton 
                     onClick={handlePlaceOrder}
-                    className="w-full h-28 rounded-[3rem] bg-white text-[#2D2321] font-headline font-black uppercase tracking-[0.3em] text-sm shadow-3xl hover:bg-primary hover:text-white transition-all transform hover:scale-[1.02] active:scale-[0.98]"
+                    className="w-full h-28 rounded-[3rem] bg-on-surface text-surface font-headline font-black uppercase tracking-[0.3em] text-sm shadow-3xl hover:bg-primary transition-all transform hover:scale-[1.02] active:scale-[0.98]"
                   >
                     Confirm & Capture Dispatch
                   </OceanButton>
@@ -363,13 +363,13 @@ export default function CheckoutPage() {
 
              </div>
              
-             <div className="px-10 py-8 bg-white rounded-[3rem] border border-outline-variant/10 flex items-center gap-6 shadow-xl">
-                <div className="w-14 h-14 rounded-2xl bg-[#F3EFE6] flex items-center justify-center shrink-0">
+             <div className="px-10 py-8 bg-surface-container-lowest rounded-[3rem] border border-outline-variant/10 flex items-center gap-6 shadow-xl">
+                <div className="w-14 h-14 rounded-2xl bg-surface-container flex items-center justify-center shrink-0">
                    <ShieldCheck className="w-7 h-7 text-primary" />
                 </div>
                 <div className="flex flex-col">
-                   <span className="text-xs font-black uppercase text-[#2D2321] leading-none mb-2 tracking-widest">Coastal Secure</span>
-                   <p className="text-[9px] font-bold text-[#5D4037] leading-relaxed uppercase opacity-60">Verified Marine Trade Protection. Your payment is secured via 256-bit SSL encryption.</p>
+                   <span className="text-xs font-black uppercase text-on-surface leading-none mb-2 tracking-widest">Coastal Secure</span>
+                   <p className="text-[9px] font-bold text-on-surface-variant leading-relaxed uppercase opacity-60">Verified Marine Trade Protection. Your payment is secured via 256-bit SSL encryption.</p>
                 </div>
              </div>
           </div>
